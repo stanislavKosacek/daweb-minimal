@@ -10,7 +10,7 @@ use App\Model\Czechitas\CodeShare\CodeShare;
 use App\Model\Czechitas\CodeShare\CodeShareRepository;
 use Nette\Application\BadRequestException;
 
-final class CodeSharePresenter extends SecuredPresenter
+final class CodeSharePresenter extends BasePresenter
 {
 
 	/** @var CodeShareRepository @autowire */
