@@ -60,19 +60,19 @@ Author: GrayGrids
 
     let pageScrolls = document.querySelectorAll(".page-scroll");
 
-    if (pageScrolls && navbarToggler && navbarCollapse) {
-        pageScrolls.forEach(e =>
-            e.addEventListener("click", () => {
-                navbarToggler.classList.remove("active");
-                navbarCollapse.classList.remove('show')
-            })
-        );
-    }
+    // if (pageScrolls && navbarToggler && navbarCollapse) {
+    //     pageScrolls.forEach(e =>
+    //         e.addEventListener("click", () => {
+    //             navbarToggler.classList.remove("active");
+    //             navbarCollapse.classList.remove('show')
+    //         })
+    //     );
+    // }
 
     if (navbarToggler) {
         navbarToggler.addEventListener('click', function () {
             navbarToggler.classList.toggle("active");
-            navbarCollapse.classList.toggle("show");
+            //navbarCollapse.classList.toggle("show");
         })
     }
 

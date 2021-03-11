@@ -3,10 +3,10 @@
     <div class="col-lg-12 mt-2 mb-2">
         <div class="px-3 py-3">
             <div class="row">
-                <div class="col-3">
+                <div class="col-md-3">
                     <h3 class="mb-3 font-bold">{if $exercise->getOrderInLesson()}{$exercise->getOrderInLesson()}. {/if}{$exercise->getName()}</h3>
                 </div>
-                <div class="col-9 parsedown exercise--assignment">
+                <div class="col-md-9 parsedown exercise--assignment">
                     {block |parsedown}{$exercise->getAssignment()|noescape}{/block}
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     <div class="about-tab px-3 py-3" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                         <div class="row">
                             <h3 class="mb-3">Řešení</h3>
-                            <div class="col-3">
+                            <div class="col-md-3">
                                 <ul class="nav nav-tabs flex-column" id="myTab{$exercise->getId()}" role="tablist">
                                     {foreach $exercise->getExerciseSolutionFiles() as $solutionFile}
                                         <li class="nav-item mb-1">
@@ -36,7 +36,7 @@
                                     {/foreach}
                                 </ul>
                             </div>
-                            <div class="tab-content col-9" id="myTabContent{$exercise->getId()}">
+                            <div class="tab-content col-md-9" id="myTabContent{$exercise->getId()}">
                                 {foreach $exercise->getExerciseSolutionFiles() as $solutionFile}
                                     <div class="tab-pane fade{if $iterator->first} active show{/if}" id="solution{$solutionFile->getId()}" role="tabpanel">
                                         <div class="tab-content">
