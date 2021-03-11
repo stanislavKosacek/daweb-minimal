@@ -1,0 +1,48 @@
+{block content}
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 n:block="title" class="page-title">Seznam lekcí</h1>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a n:href="Homepage:default">Úvod</a></li>
+                        <li>Seznam lekcí</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="section blog-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="post-details">
+                        <div class="detail-inner">
+                            <h2 class="post-title">
+                                Seznam lekcí
+                            </h2>
+                            <table class="table">
+                                <tr>
+                                    <th>Název lekce</th>
+                                    <th>Datum</th>
+                                    <th></th>
+                                </tr>
+                                {foreach $lessons as $lesson}
+                                    <tr>
+                                        <td>{$lesson->getPage()->getName()}</td>
+                                        <td>{$lesson->getDateStart()|date:"j. n. Y"}</td>
+                                        <td><a n:href="Page:default $lesson->getPage()->getId()" class="btn btn-primary bg-color-czechitas-secondary"><i class="fa fa-search"></i></a></td>
+                                    </tr>
+                                {/foreach}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{/block}
