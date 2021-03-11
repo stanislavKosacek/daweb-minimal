@@ -1,0 +1,68 @@
+{block content}
+    {varType App\Model\Czechitas\HomeworkSolution\HomeworkSolution[] $homeworkSolutions}
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 n:block="title" class="page-title">Domácí úkoly</h1>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a n:href="Homepage:default">Úvod</a></li>
+                        <li>Domácí úkoly</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- Start Contact Area -->
+    <section id="contact-us" class="contact-us section mb-5">
+        <div class="container">
+            <div class="contact-head">
+                <div class="row">
+                    <div class="col-12 p-5">
+                        {if $presenter->getUser()->isInRole("admin")}
+                        <p>Admin úkoly neodevzdává</p>
+                        {else}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>Úkol</th>
+                                    <th>Lekce</th>
+                                    <th>Deadline</th>
+                                    <th>Stav</th>
+                                    <th></th>
+                                </tr>
+                                {foreach $homeworkSolutions as $homeworSolution}
+                                    <tr>
+                                        <td>{$homeworSolution->getHomeworkAssignment()->getPage()->getName()}</td>
+                                        <td>{$homeworSolution->getHomeworkAssignment()->getLesson()->getPage()->getName()} ({$homeworSolution->getHomeworkAssignment()->getLesson()->getTranslatedPageType()})</td>
+                                        <td>{$homeworSolution->getHomeworkAssignment()->getDeadline()|date:"j. n. Y H:i"}</td>
+                                        <td>
+                                            {if $homeworSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_UNDELIVERED}
+                                                <span class="badge bg-danger"><i class="fa fa-times"></i></span>
+                                            {elseif $homeworSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_WAITING}
+                                                <span class="badge bg-info"><i class="fa fa-clock-o"></i></span>
+                                            {elseif $homeworSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_OK}
+                                                <span class="badge bg-success"><i class="fa fa-check"></i></span>
+                                            {elseif $homeworSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_WRONG}
+                                                <span class="badge bg-warning"><i class="fa fa-warning"></i></span>
+                                            {/if}
+                                            {$homeworSolution->getTranslatedState()}
+                                        </td>
+                                        <td><a n:href="Page:default $homeworSolution->getHomeworkAssignment()->getPage()->getId()" class="btn btn-primary bg-color-czechitas-secondary"><i class="fa fa-search"></i></a></td>
+                                    </tr>
+                                {/foreach}
+                            </table>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ End Contact Area -->
+{/block}

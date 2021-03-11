@@ -1,0 +1,31 @@
+{layout '@countdownLayout.latte'}
+{block content}
+    <div class="countdown">
+		<div class="countdown__text">
+        	<h1 id="timer__text">{$countdown->getText()}</h1>
+        	<p id="timer"></p>
+		</div>
+		<div n:if="$user and $user->isInRole('admin')" class="settings">
+			<a n:href=":Admin:Countdown:detail $countdown->getId()" target="_blank" class="btn btn-primary"><i class="fa fa-cog"></i></a>
+		</div>
+    </div>
+{/block}
+
+{block scripts}
+    <script>
+		const timerElm = document.querySelector('#timer');
+		const timerTextElm = document.querySelector('#timer__text');
+
+		const getEndTime = () => {
+			fetch({link getEnd!})
+				.then(response => response.json())
+				.then(data => {
+					window.printCountdownTime(data.time, timerElm);
+					window.printCountdownText(data.text, timerTextElm);
+					setTimeout(getEndTime, 1000);
+				});
+		}
+		getEndTime();
+
+    </script>
+{/block}

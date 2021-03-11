@@ -1,0 +1,49 @@
+{layout '../../../../Presenters/templates/@layout.latte'}
+{varType App\Model\Czechitas\Lesson\Lesson $selectedLesson}
+{block heading}
+<h2 n:define="title">
+    {ifset $selectedHomeworkAssignment}
+        Lekce - {$selectedLesson->getPage()->getName()} | Úkol - {$selectedHomeworkAssignment->getPage()->getName()}
+    {else}
+        Lekce - {$selectedLesson->getPage()->getName()}
+    {/ifset}
+</h2>
+{include title}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a n:href=":Admin:Czechitas:Lesson:default">Lekce</a>
+        </li>
+        {ifset $selectedHomeworkAssignment}
+            <li class="breadcrumb-item">
+                <a n:href=":Admin:Czechitas:EditLesson:EditLesson:default $selectedLesson->getId()">{$selectedLesson->getPage()->getName()}</a>
+            </li>
+            <li class="breadcrumb-item">
+                <strong>{$selectedHomeworkAssignment->getPage()->getName()}</strong>
+            </li>
+        {else}
+            <li class="breadcrumb-item">
+                <strong>{$selectedLesson->getPage()->getName()}</strong>
+            </li>
+        {/ifset}
+    </ol>
+{/block}
+{block content}
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li {if $presenter->isLinkCurrent("EditLesson:*")}class="active"{/if}><a n:href="EditLesson:default $selectedLesson->getId()">Lekce</a></li>
+            <li {if $presenter->isLinkCurrent("LessonFile:*")}class="active"{/if}><a n:href="LessonFile:default $selectedLesson->getId()">Soubory <span class="label label-info float-right ml-1">{$selectedLesson->getFiles()->countStored()}</span></a></li>
+            <li {if $presenter->isLinkCurrent("Comments")}class="active"{/if}><a n:href="Comments:comments $selectedLesson->getId()">Komentáře <span class="label label-info float-right ml-1">{$selectedLesson->getPage()->getComments()->countStored()}</span></a></li>
+            <li {if $presenter->isLinkCurrent("Homework:*")}class="active"{/if}><a n:href="Homework:default $selectedLesson->getId()">Domácí úkoly <span class="label label-info float-right ml-1">{$selectedLesson->getHomeworkAssignments()->countStored()}</span></a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active">
+                <div class="panel-body">
+                    {include #tab}
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+
+{block actions}
+{/block}

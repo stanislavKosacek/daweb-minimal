@@ -1,0 +1,37 @@
+{block heading}
+    <h2 n:define="title">Redirects</h2>
+    {include title}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a n:href=":Admin:Settings:Settings:default">Nastavení</a>
+        </li>
+        <li class="breadcrumb-item">
+            <strong>Redirects</strong>
+        </li>
+    </ol>
+{/block}
+
+{block actions}
+    <a n:href="add" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat Redirect</a>
+{/block}
+
+{block content}
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>Z</th>
+                <th>Na</th>
+                <th></th>
+            </tr>
+            {foreach $redirects as $redirect}
+                <tr>
+                    <td>{$redirect->getFrom()}</td>
+                    <td>{$redirect->getTo()}</td>
+                    <td>
+                        <a n:href="edit $redirect->getId()" class="btn btn-primary ajax"><i class="fa fa-edit"></i></a>
+                    </td>
+                </tr>
+            {/foreach}
+        </table>
+    </div>
+{/block}

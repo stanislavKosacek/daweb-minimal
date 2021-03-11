@@ -1,0 +1,20 @@
+{block heading}
+    <h2 n:define="title">Obrázky</h2>
+    {include title}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a n:href=":Admin:Settings:Settings:default">Nastavení</a>
+        </li>
+        <li class="breadcrumb-item">
+            <strong>Obrázky</strong>
+        </li>
+    </ol>
+{/block}
+
+{block actions}
+    <a n:href="add" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat obrázek</a>
+{/block}
+
+{block content}
+    {control imageGrid}
+{/block}

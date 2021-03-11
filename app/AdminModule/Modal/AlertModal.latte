@@ -1,0 +1,17 @@
+<div class="modal-header">
+	{control close}
+	<h4 class="modal-title">{_admin-common.modals.alert.headline}</h4>
+</div>
+<div class="modal-body">
+
+	<div class="panel-body no-padding">
+		<div n:foreach="$messages as $message" class="alert alert-danger">{_admin-common.modals.alert.$message}</div>
+		<div n:if="$extraHtml">{$extraHtml}</div>
+	</div>
+
+</div>
+<div n:if="1" class="modal-footer">
+	{form alert}
+		{input dismiss}
+	{/form}
+</div>

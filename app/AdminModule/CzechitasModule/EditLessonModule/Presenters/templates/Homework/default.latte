@@ -1,0 +1,33 @@
+{varType App\Model\Czechitas\Lesson\Lesson $selectedLesson}
+{block #tab}
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>Název</th>
+                <th>URL</th>
+                <th>Git složka</th>
+                <th>Deadline</th>
+                <th>Odevzdáno / Nezkontrolováno</th>
+                <th></th>
+            </tr>
+            {foreach $selectedLesson->getHomeworkAssignments() as $homework}
+                <tr>
+                    <td>{$homework->getPage()->getName()}</td>
+                    <td><a n:href=":Page:default $homework->getPage()->getId()" target="_blank">{link //:Page:default $homework->getPage()->getId()}</a></td>
+                    <td>/{$homework->getGitFolder()}</td>
+                    <td>{if $homework->getDeadline()}{$homework->getDeadline()|date:"j. n. Y H:i"}{else}Není nastaven deadline{/if}</td>
+                    <td>{$homework->getHomeworkSolutions()->countStored()} / {$homework->getUncheckedHomeworkSolutions()->countStored()}</td>
+                    <td>
+                        <a n:href="editHomework $selectedLesson->getId(), $homework->getId()" class="btn btn-primary ajax"><i class="fa fa-pencil"></i></a>
+                        <a n:href="detail $selectedLesson->getId(), $homework->getId()" class="btn btn-default"><i class="fa fa-search"></i></a>
+                        <a n:href="deleteHomework! $homework->getId()" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            {/foreach}
+        </table>
+    </div>
+{/block}
+{block #actions}
+    <a n:href="addHomework $selectedLesson->getId()" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat úkol</a>
+    {include parent}
+{/block}

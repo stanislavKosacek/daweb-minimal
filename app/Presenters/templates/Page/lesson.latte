@@ -1,0 +1,133 @@
+{block content}
+    {varType App\Model\Page\Page\Page $selectedPage}
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 n:block="title" class="page-title">{$selectedPage->getName()}</h1>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a n:href="Homepage:default">Úvod</a></li>
+                        <li>{$selectedPage->getName()}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="section blog-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    {*
+                    <div class="post-thumbnils">
+                        {if $selectedPage->getImage()}
+                            <img class="thumb lazy" data-src="{img $selectedPage->getImage() resize(1104, 735, exact)}" alt="{$selectedPage->getName()}">
+                        {else}
+                            <img class="thumb lazy" data-src="{$basePath}/src/front/massive-template/images/blog/blog-grid1.jpg" alt="{$selectedPage->getName()}">
+                        {/if}
+                        <div class="author bg-white">
+                            <img class="lazy"
+                                 data-src="{$basePath}/src/front/images/{if $lesson->getType() == App\Model\Czechitas\Lesson\Lesson::TYPE_HTML}html-logo.png{elseif $lesson->getType() == App\Model\Czechitas\Lesson\Lesson::TYPE_JS}js_logo.svg{elseif $lesson->getType() == App\Model\Czechitas\Lesson\Lesson::TYPE_REACT}react.png{else}czechitas_logo_small.png{/if}"
+                                 alt="Logo typu lekce">
+                            <span class="text-black-50">{$selectedPage->getLesson()->getTranslatedPageType()}</span>
+                        </div>
+                    </div>
+    *}
+                    <div class="post-details">
+                        <div class="detail-inner">
+                            <h2 class="post-title">
+                                {$selectedPage->getName()}
+                            </h2>
+                            {foreach $lesson->getPublishedExercises() as $exercise}
+                                <a class="scroll-anchor" id="cviceni-{$exercise->getWebalizeName()}"></a>
+                            {var $exerciseId = $exercise->getId()}
+                                <div class="mb-5">
+                                    {control exercise-$exerciseId}
+                                </div>
+                            {/foreach}
+                            {*
+                            <ul class="custom-flex post-meta">
+                                <li>
+                                    <i class="lni lni-calendar color-czechitas"></i>
+                                    {capture $dayOfWeek}{$lesson->getDateStart()|date:"N"}{/capture}{_frontend-common.dayOfWeek.$dayOfWeek} {$lesson->getDateStart()|date:"j. n. Y"} {$lesson->getDateStart()|date:"H:i"} - {$lesson->getDateEnd()|date:"H:i"}
+                                </li>
+                                <li>
+                                    <i class="lni lni-home color-czechitas"></i>
+                                    {$lesson->getHomeworkAssignments()->countStored()} Úkolů
+                                </li>
+                                <li>
+                                    <i class="lni lni-files color-czechitas"></i>
+                                    {$lesson->getFiles()->countStored()} Souborů
+                                </li>
+                                <li>
+                                    <i class="lni lni-comments color-czechitas"></i>
+                                    {$selectedPage->getComments()->countStored()} Komentářů
+                                </li>
+                            </ul>
+                            <div class="page mt-4">
+                                {foreach $selectedPage->getPageBlocks() as $pageBlock}
+                                    {var $pageBlockId = $pageBlock->getId()}
+                                    {control frontendBlockComponent-$pageBlockId}
+                                {/foreach}
+                            </div>
+
+    *}
+                        </div>
+                        {*                        {control comments}*}
+                    </div>
+                </div>
+                {*
+                <aside class="col-lg-4 col-md-12 col-12">
+                    <div class="sidebar">
+                        <div class="widget popular-feeds">
+                            <h5 class="widget-title">Soubory k lekci</h5>
+                            <div class="popular-feed-loop">
+                                {if $selectedPage->getLesson()->getFiles()->countStored() > 0}
+                                <table class="table">
+                                    <tr>
+                                        <td>Soubor</td>
+                                        <td>Popis</td>
+                                    </tr>
+
+                                {foreach $selectedPage->getLesson()->getFiles() as $file}
+                                    <tr>
+                                        <td><a href="{$basePath}/{$file->getNameWithPath()}" target="_blank">{$file->getName()}</a></td>
+                                        <td>{$file->getDescription()}</td>
+                                    </tr>
+                                {/foreach}
+                                </table>
+                                {else}
+                                    Žádné přiložené soubory
+                                {/if}
+                            </div>
+                        </div>
+                        <div class="widget categories-widget">
+                            <h5 class="widget-title">Domácí úkoly</h5>
+                            {if $selectedPage->getLesson()->getHomeworkAssignments()->countStored() > 0}
+                            <table class="table">
+                                <tr>
+                                    <td>Název</td>
+                                    <td>Deadline</td>
+                                </tr>
+                                {foreach $selectedPage->getLesson()->getHomeworkAssignments() as $homework}
+                                    <tr>
+                                        <td><a n:href="Page:default $homework->getPage()->getId()" class="ajax">{$homework->getPage()->getName()}</a></td>
+                                        <td>{if $homework->getDeadline()}{$homework->getDeadline()|date:"j. n. Y"}{else}Není nastaven{/if}</td>
+                                    </tr>
+                                {/foreach}
+                            </table>
+                            {else}
+                                Žádné zadané úkoly
+                            {/if}
+                        </div>
+                    </div>
+                </aside>
+    *}
+            </div>
+        </div>
+    </section>
+{/block}

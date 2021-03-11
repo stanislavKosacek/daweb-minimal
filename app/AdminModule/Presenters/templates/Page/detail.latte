@@ -1,0 +1,120 @@
+{varType App\Model\Page\Page\Page $selectedPage}
+{block heading}
+    <h2 n:define="title">{$selectedPage->getName()}</h2>
+    {include title}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a n:href=":Admin:Page:default">Stránky</a>
+        </li>
+        <li class="breadcrumb-item">
+            <strong>{$selectedPage->getName()}</strong>
+        </li>
+    </ol>
+{/block}
+
+{block actions}
+    <a n:href="addPageBlock $selectedPage->getId()" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat blok stránky</a>
+{/block}
+
+{block content}
+    <div class="row">
+        <div class="col-lg-9">
+            {control editPageBlocks}
+        </div>
+        <div class="col-lg-3">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Stránka
+                        </div>
+                        <div class="panel-body no-padding">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        {$selectedPage->getName()}
+                                    </span>
+                                    <strong>Název stránky:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        <a n:href="togglePublishedState!" class="ajax">
+                                            {if !$selectedPage->getPublished()}
+                                                Nepublikováno <span class='label label-danger'><i class='fa fa-times-circle'></i></span>
+                                            {elseif $selectedPage->getPublished() <= new DateTimeImmutable()}
+                                                Publikováno {$selectedPage->getPublished()|date:'j. n. Y H:i'} <span class='label label-primary'><i class='fa fa-check-circle'></i></span>
+                                            {elseif $selectedPage->getPublished() > new DateTimeImmutable()}
+                                                Naplánováno {$selectedPage->getPublished()|date:'j. n. Y H:i'} <span class='label label-info'><i class='fa fa-clock-o'></i></span>
+                                            {/if}
+                                        </a>
+                                    </span>
+                                    <strong>Publikováno:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        <a n:href=":Page:default $selectedPage->getId()" target="_blank">{link //:Page:default $selectedPage->getId()} <i
+                                                    class="fa fa-external-link-square"></i></a>
+                                    </span>
+                                    <strong>Odkaz:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        {$selectedPage->getComments()->countStored()}
+                                    </span>
+                                    <strong>Počet komentářů:</strong>
+                                </li>
+                                <li class="list-group-item" n:if="$selectedPage->getImage()">
+                                    <span class="pull-right">
+                                       <a href="{img $selectedPage->getImage()}" data-toggle="lightbox" data-gallery="grid">
+                                            <picture>
+                                                <source srcset="{img $selectedPage->getImage(), resize(200,150,exact)} 2x, {img $selectedPage->getImage(), resize(100,75,exact)} 1x">
+                                                <img n:img="$selectedPage->getImage(), resize(100,75,exact)" width="100" alt="Náhled">
+                                            </picture>
+                                        </a>
+                                    </span>
+                                    <strong>Obrázek:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <a n:href="editPage $selectedPage->getId(), 'detail'" class="btn btn-primary"><i class="fa fa-pencil"></i> Upravit stránku</a>
+                                    <a n:href="showComments $selectedPage->getId()" class="btn btn-primary ajax">Zobrazit komentáře</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            SEO
+                        </div>
+                        <div class="panel-body no-padding">
+                            <div class="p-3">
+                                {control editTargetForm}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="panel panel-info">
+                        <div class="ibox-tools m-r-md">
+                            <a n:href="showComments $selectedPage->getId()" class="ajax">
+                                <i class="fa fa-window-maximize text-white"></i>
+                            </a>
+                        </div>
+                        <div class="panel-heading">
+                            Komentáře
+                        </div>
+                        <div class="panel-body no-padding">
+                            <div class="p-3">
+                                {control comments}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

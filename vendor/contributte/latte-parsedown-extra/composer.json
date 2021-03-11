@@ -1,0 +1,46 @@
+{
+  "name": "contributte/latte-parsedown-extra",
+  "description": "ParsedownExtra / Markdown parser for Latte",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/contributte/latte-parsedown-extra",
+  "authors": [
+    {
+      "name": "Milan Felix Šulc",
+      "homepage": "https://f3l1x.io"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "erusev/parsedown": "~1.7.3",
+    "erusev/parsedown-extra": "^0.7.1|^0.8.0",
+    "latte/latte": "~2.5.1|~2.6.0|~2.7.0|~2.8.0",
+    "nette/di": "^3.0",
+    "nette/utils": "~3.0.0|~3.1.0"
+  },
+  "require-dev": {
+    "ninjify/qa": "^0.9",
+    "ninjify/nunjuck": "^0.2",
+    "nette/application": "~3.0.0",
+    "phpstan/extension-installer": "^1.0",
+    "phpstan/phpstan-deprecation-rules": "^0.11",
+    "phpstan/phpstan-nette": "^0.11",
+    "phpstan/phpstan-shim": "^0.11",
+    "phpstan/phpstan-strict-rules": "^0.11"
+  },
+  "autoload": {
+    "psr-4": {
+      "Contributte\\Parsedown\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.6.x-dev"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+app/config/local.neon
+.idea/
+node_modules

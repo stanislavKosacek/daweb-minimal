@@ -1,0 +1,65 @@
+{block content}
+<!-- Start Breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 n:block="title" class="page-title">Sdílení kódu</h1>
+                </div>
+                <ul class="breadcrumb-nav">
+                    <li><a n:href="Homepage:default">Úvod</a></li>
+                    <li>Sdílení kódu</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<!-- Start Contact Area -->
+<section id="contact-us" class="contact-us section mb-5">
+    <div class="container">
+        <div class="contact-head">
+            <div class="row">
+                <div class="col-12">
+                    <div class="single-head bg-color-czechitas-secondary">
+                        <form n:name="shareForm">
+                            <div n:ifcontent>
+                                <div class="alert alert-danger" n:foreach="$form->getOwnErrors() as $error">{$error}</div>
+                            </div>
+
+                            <div class="form-group required has-error d-none">
+                                <div class="col-sm-12 control-label text-white">{label name/}</div>
+
+                                <div class="col-sm-0">{input name}
+                                    <span class="text-danger" n:ifcontent>{inputError name}</span></div>
+                            </div>
+
+                            <div class="form-group required has-error">
+                                <div class="col-sm-12 control-label text-white">{label language/}</div>
+
+                                <div class="col-sm-0">{input language}
+                                    <span class="text-danger" n:ifcontent>{inputError language}</span></div>
+                            </div>
+
+                            <div class="form-group has-error">
+                                <div class="col-sm-12 control-label text-white">{label code/}</div>
+
+                                <div class="col-sm-0">{input code}
+                                    <span class="text-danger" n:ifcontent>{inputError code}</span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 control-label"></div>
+                                <div class="col-sm-0 button"><input n:name="upload" class="btn bg-color-czechitas" value="Nahrát"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ End Contact Area -->
+{/block}

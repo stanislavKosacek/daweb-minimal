@@ -1,0 +1,59 @@
+{
+  "name": "contributte/scheduler",
+  "description": "PHP job scheduler (cron) with locking",
+  "keywords": [
+    "nette",
+    "cron",
+    "contributte",
+    "scheduler"
+  ],
+  "license": "MIT",
+  "type": "library",
+  "homepage": "https://github.com/contributte/scheduler",
+  "authors": [
+    {
+      "name": "Milan Felix Šulc",
+      "homepage": "https://f3l1x.io"
+    },
+    {
+      "name": "Josef Benjac",
+      "homepage": "http://josefbenjac.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "contributte/di": "^0.5",
+    "dragonmantank/cron-expression": "^3.0.1",
+    "symfony/console": "^5.0.0"
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.2.0",
+    "ninjify/qa": "^0.12",
+    "ninjify/nunjuck": "^0.4",
+    "phpstan/phpstan": "^0.12",
+    "phpstan/phpstan-deprecation-rules": "^0.12",
+    "phpstan/phpstan-nette": "^0.12",
+    "phpstan/phpstan-strict-rules": "^0.12",
+    "tracy/tracy": "~2.6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Contributte\\Scheduler\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Fixtures\\": "tests/fixtures"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.8.x-dev"
+    }
+  }
+}

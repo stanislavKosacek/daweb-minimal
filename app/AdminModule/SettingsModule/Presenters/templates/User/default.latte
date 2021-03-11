@@ -1,0 +1,20 @@
+{block heading}
+    <h2 n:define="title">Uživatelé</h2>
+    {include title}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a n:href=":Admin:Settings:Settings:default">Nastavení</a>
+        </li>
+        <li class="breadcrumb-item">
+            <strong>Uživatelé</strong>
+        </li>
+    </ol>
+{/block}
+
+{block actions}
+    <a n:href="add" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat uživatele</a>
+{/block}
+
+{block content}
+    {control userGrid}
+{/block}

@@ -1,0 +1,24 @@
+{varType App\Model\Czechitas\HomeworkSolution\HomeworkSolution $userSolution}
+{if $userSolution}
+    {if $userSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_UNDELIVERED}
+        <span class="badge bg-danger"><i class="fa fa-times"></i></span>
+    {elseif $userSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_WAITING}
+        <span class="badge bg-info"><i class="fa fa-clock-o"></i></span>
+    {elseif $userSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_OK}
+        <span class="badge bg-success"><i class="fa fa-check"></i></span>
+    {elseif $userSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_WRONG}
+        <span class="badge bg-warning"><i class="fa fa-warning"></i></span>
+    {/if}
+    <br>{$userSolution->getTranslatedState()}
+    {if $userSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_UNDELIVERED}
+        <a href="{link markHomeworkAsSubmitted!}" class="btn btn-primary">Označit úkol jako odevzdaný</a>
+    {elseif $userSolution->getState() == App\Model\Czechitas\HomeworkSolution\HomeworkSolution::STATE_WAITING}
+        <tr>
+            <td>
+                <a n:href="removeSolution!" class="btn btn-danger">Znovu označit jako neodevzdané</a>
+            </td>
+        </tr>
+    {/if}
+{elseif $presenter->getUser()->isInRole("admin")}
+    Admin úkol neodevzdává
+{/if}

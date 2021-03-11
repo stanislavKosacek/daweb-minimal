@@ -1,0 +1,39 @@
+{block heading}
+    <h2 n:define="title">Role</h2>
+    {include title}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a n:href=":Admin:Settings:Settings:default">Nastavení</a>
+        </li>
+        <li class="breadcrumb-item">
+            <strong>Role</strong>
+        </li>
+    </ol>
+{/block}
+
+{block actions}
+    <a n:href="add" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat roli</a>
+{/block}
+
+{block content}
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>Název</th>
+                <th>Název ČJ</th>
+                <th>Počet uživatelů</th>
+                <th></th>
+            </tr>
+            {foreach $roles as $role}
+                <tr>
+                    <td>{$role->getName()}</td>
+                    <td>{$role->getNameCs()}</td>
+                    <td>{$role->getUsers()->countStored()}</td>
+                    <td>
+                        {*<a n:href="edit $role->getId()" class="btn btn-primary ajax"><i class="fa fa-edit"></i></a>*}
+                    </td>
+                </tr>
+            {/foreach}
+        </table>
+    </div>
+{/block}

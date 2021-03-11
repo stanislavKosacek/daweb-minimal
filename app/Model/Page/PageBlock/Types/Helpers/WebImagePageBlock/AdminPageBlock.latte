@@ -1,0 +1,23 @@
+{varType App\Model\Page\PageBlock\Types\WebImagePageBlock $pageBlock}
+<div class="tabs-container">
+    <ul class="nav nav-tabs" role="tablist">
+        <li><a class="nav-link active" data-toggle="tab" href="#{$control->getUniqueId()}tab-1">Editace</a></li>
+        <li n:if="$pageBlock->getWebImage()"><a class="nav-link" data-toggle="tab" href="#{$control->getUniqueId()}tab-2">Výsledek</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" id="{$control->getUniqueId()}tab-1" class="tab-pane active">
+            <div class="panel-body">
+                {control form}
+            </div>
+        </div>
+        <div n:if="$pageBlock->getWebImage()" role="tabpanel" id="{$control->getUniqueId()}tab-2" class="tab-pane">
+            <div class="panel-body">
+                <div class="text-center">
+                    {picture $pageBlock->getWebImage()}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

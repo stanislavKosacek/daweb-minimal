@@ -1,0 +1,264 @@
+parameters:
+	hashids:
+		salt: 'PyEWwyHv7bG7sa*JrcD^w7%LD'
+		hashLength: 15
+
+http:
+	# IP adresa, rozsah (např. 127.0.0.1/8) nebo pole těchto hodnot
+	proxy: 127.0.0.1       # (string|string[]) výchozí je nenastaveno
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+extensions:
+    dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
+    nextras.orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+    autowired: Kdyby\Autowired\DI\AutowiredExtension
+    webpack: Oops\WebpackNetteAdapter\DI\WebpackExtension(%debugMode%, %consoleMode%)
+    translation: Contributte\Translation\DI\TranslationExtension
+    images: WebChemistry\Images\DI\ImagesExtension
+    parsedown: Contributte\Parsedown\DI\ParsedownExtraExtension
+    console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+    scheduler: Contributte\Scheduler\DI\SchedulerExtension
+    migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+    events: Contributte\EventDispatcher\DI\EventDispatcherExtension
+
+nextras.orm:
+    model: App\Model\Orm
+
+webpack:
+	manifest:
+		name: manifest.json
+	build:
+		directory: %wwwDir%/dist
+		publicPath: dist/
+	devServer:
+		enabled: %debugMode%
+		url: http://localhost:8080/dist
+
+translation:
+    locales:
+        whitelist: [cs, en]
+        default: cs
+        fallback: [cs_CZ, cs]
+    dirs:
+        - %appDir%/lang
+    localeResolvers:
+        - Contributte\Translation\LocalesResolvers\Router
+        - Contributte\Translation\LocalesResolvers\Session
+
+images:
+	enable: yes
+	defaultImage: ""
+	wwwDir: %wwwDir%
+	assetsDir: assets
+	modifiers: []
+	aliases: [resize: "resize:$1,$2,$3"]
+	hashResolver: WebChemistry\Images\Resolvers\HashResolver ## Vysvětleno níže
+	namespaceResolver: WebChemistry\Images\Resolvers\NamespaceResolver ## Vysvětleno níže
+	registerControl: yes ## Zaregistruje UploadControl
+	registerType: no ## Zaregistruje doctrine typ 'image'
+	safeLink: %productionMode% ## metoda link() se zotavuje z chyb a loguje tyto chyby do tracy, web nespadne do 500 kvůli chybnému obrázku
+
+parsedown:
+    helper: parsedown # Name of the helper in Latte
+
+console:
+    name: DA WEB CB
+    version: '1.0'
+    catchExceptions: true
+    autoExit: true
+    url: https://dawebcb.cz
+    lazy: false
+
+scheduler:
+	path: '%tempDir%/scheduler'
+	jobs:
+		# stats must be registered as service and have method calculate
+		# - { cron: '* * * * *', callback: [ @test, sendEmails ] }
+		# monitor is class with static method echo
+		# - { cron: '*/2 * * * *', callback: App\Model\Monitor::echo }
+		- App\Model\Cron\SendEmails()
+
+php:
+	date.timezone: Europe/Prague
+
+session:
+	expiration: 30 days
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+migrations:
+    dir: %appDir%/Model/Migrations # migrations base directory
+    driver: mysql               # pgsql or mysql
+    dbal: nextras               # nextras, nette, doctrine or dibi
+    withDummyData: false
+
+latte:
+   macros:
+   	- App\Model\Helpers\Latte\YoutubeEmbed
+   	- App\Model\Helpers\Latte\Picture
+   	- App\Model\Helpers\Latte\AdminProfilePicture
+   	- App\Model\Helpers\Latte\FrontendProfilePicture
+
+
+forms:
+	messages:
+		EQUAL: 'Zadejte %s.'
+		NOT_EQUAL: 'Tato hodnota by neměla být %s.'
+		FILLED: 'Toto pole je povinné.'
+		BLANK: 'Toto pole by mělo být prázdné.'
+		MIN_LENGTH: 'Zadejte prosím alespoň %d znaků.'
+		MAX_LENGTH: 'Zadejte prosím maximálně %d znaků.'
+		LENGTH: 'Zadejte prosím hodnotu %d až %d znaků dlouho.'
+		EMAIL: 'Zadejte platnou e-mailovou adresu.'
+		URL: 'Zadejte prosím platné URL.'
+		INTEGER: 'Zadejte platné celé číslo.'
+		FLOAT: 'Zadejte platné číslo.'
+		MIN: 'Zadejte prosím hodnotu větší nebo rovnou %d.'
+		MAX: 'Zadejte prosím hodnotu menší nebo rovnou %d.'
+		RANGE: 'Zadejte hodnotu mezi %d a %d.'
+		MAX_FILE_SIZE: 'Velikost nahraného souboru může být nejvýše %d bytů.'
+		MAX_POST_SIZE: 'Nahraná data překračují limit %d bytů.'
+		MIME_TYPE: 'Nahraný soubor není v očekávaném formátu.'
+		IMAGE: 'Nahraný soubor musí být obraz ve formátu JPEG, GIF, PNG nebo WebP.'
+		Nette\Forms\Controls\SelectBox::VALID: 'Vyberte prosím platnou možnost.'
+		Nette\Forms\Controls\UploadControl::VALID: 'Při nahrávání souboru došlo k chybě.'
+		Nette\Forms\Controls\CsrfProtection::PROTECTION: 'Vaše relace vypršela. Vraťte se na domovskou stránku a zkuste to znovu.'
+
+services:
+	router: App\Router\RouterFactory::createRouter
+	nextras.orm.dependencyProvider: Nextras\Orm\Bridges\NetteDI\DependencyProvider
+	authenticator: App\Model\Security\Authenticator
+	nette.userStorage: App\Model\Security\UserStorage
+	tracy.logger: App\Model\Logger\SentryTracyLogger(%sentry%)
+	test: App\Model\Cron\Test
+
+	# Common
+	- App\Model\Form\BaseFormFactory
+	- App\Components\Sign\SignUpFormFactory
+	- App\Components\Sign\SignInFormFactory
+	- App\Model\Grid\BaseGridFactory
+	- App\AdminModule\Modal\ConfirmModalFactory
+	- App\Model\Router\DbRouterFactory
+	- App\Components\SwitchLanguageFormFactory
+	- App\Model\Helpers\Hashids(%hashids%)
+
+	# Console
+	- App\Model\Console\ClearCacheCommand
+
+	# User
+	- App\AdminModule\SettingsModule\Modal\SetUserModalFactory
+	- App\AdminModule\SettingsModule\Components\SetUserFormFactory
+	- App\Model\Modal\ModalContainer
+	- App\AdminModule\SettingsModule\Grid\UserGridFactory
+	- App\AdminModule\SettingsModule\Components\SetRoleFormFactory
+	- App\AdminModule\SettingsModule\Modal\SetRoleModalFactory
+
+	# SEO
+	- App\Model\Router\CurrentTarget
+	- App\AdminModule\SettingsModule\Components\SetTargetFormFactory
+	- App\AdminModule\SettingsModule\Modal\SetTargetModalFactory
+	- App\AdminModule\SettingsModule\Components\SetRedirectFormFactory
+	- App\AdminModule\SettingsModule\Modal\SetRedirectModalFactory
+
+	# Email
+	- App\Model\Email\EmailSettings(%mail%)
+	- App\Model\Email\SendEmailFactory
+	- App\AdminModule\Grid\EmailGridFactory
+	- App\AdminModule\Modal\ShowEmailModalFactory
+	- App\AdminModule\Modal\SendEmailModalFactory
+	- App\AdminModule\Components\SendEmailFormFactory
+
+	# EmailTypes
+	- App\Model\Email\EmailType\EmailTypeProvider
+	- App\Model\Email\EmailType\EmptyEmail\EmptyEmail
+	- App\Model\Email\EmailType\NewRegistration\NewRegistration
+
+	# Web images
+	- App\AdminModule\SettingsModule\Components\SetImageFormFactory
+	- App\AdminModule\SettingsModule\Modal\SetImageModalFactory
+	- App\AdminModule\SettingsModule\Grid\ImageGridFactory
+
+
+	# Page
+	- App\AdminModule\Grid\PageGridFactory
+	- App\AdminModule\Components\Page\AddPageFormFactory
+	- App\AdminModule\Modal\AddPageModalFactory
+	- App\AdminModule\Components\Page\EditPageFormFactory
+	- App\AdminModule\Modal\EditPageModalFactory
+	- App\AdminModule\Components\Page\AddPageBlockFormFactory
+	- App\AdminModule\Modal\AddPageBlockModalFactory
+	- App\Model\Helpers\Page\EditPageBlocksComponentFactory
+
+	# PageBlockTypes
+	- App\Model\Page\PageBlock\Types\PageBlockTypeProvider
+	- App\Model\Page\PageBlock\Types\TextPageBlock
+	- App\Model\Page\PageBlock\Types\CodeSharePageBlock
+	- App\Model\Page\PageBlock\Types\YoutubePageBlock
+	- App\Model\Page\PageBlock\Types\WebImagePageBlock
+	- App\Model\Page\PageBlock\Types\ExercisePageBlock
+
+	- App\Model\Page\PageBlock\Types\Helpers\CodeSharePageBlock\AdminPageBlockFactory
+	- App\Model\Page\PageBlock\Types\Helpers\CodeSharePageBlock\FrontendPageBlockFactory
+
+	- App\Model\Page\PageBlock\Types\Helpers\TextPageBlock\AdminPageBlockFactory
+	- App\Model\Page\PageBlock\Types\Helpers\TextPageBlock\FrontendPageBlockFactory
+
+	- App\Model\Page\PageBlock\Types\Helpers\YoutubePageBlock\AdminPageBlockFactory
+	- App\Model\Page\PageBlock\Types\Helpers\YoutubePageBlock\FrontendPageBlockFactory
+
+	- App\Model\Page\PageBlock\Types\Helpers\WebImagePageBlock\AdminPageBlockFactory
+	- App\Model\Page\PageBlock\Types\Helpers\WebImagePageBlock\FrontendPageBlockFactory
+
+	- App\Model\Page\PageBlock\Types\Helpers\Exercise\AdminPageBlockFactory
+	- App\Model\Page\PageBlock\Types\Helpers\Exercise\FrontendPageBlockFactory
+
+
+	# Comments
+	- App\Model\Helpers\Comments\CommentProviderFactory
+	- App\Model\Helpers\Comments\AdminCommentComponentFactory
+	- App\Model\Helpers\Comments\FrontendCommentComponentFactory
+	- App\AdminModule\Modal\ShowCommentsModalFactory
+
+	# Czechitas
+	- App\AdminModule\CzechitasModule\Components\CodeShare\SetCodeShareFormFactory
+	- App\AdminModule\CzechitasModule\Modal\CodeShare\SetCodeShareModalFactory
+	- App\AdminModule\CzechitasModule\Grid\CodeShareGridFactory
+	- App\Components\CodeShare\CodeShareComponentFactory
+	- App\AdminModule\CzechitasModule\Grid\LessonGridFactory
+	- App\AdminModule\CzechitasModule\Components\Lesson\AddLessonFormFactory
+	- App\AdminModule\CzechitasModule\Modal\Lesson\AddLessonModalFactory
+	- App\AdminModule\CzechitasModule\Components\Lesson\EditLessonFormFactory
+	- App\AdminModule\CzechitasModule\Modal\Lesson\EditLessonModalFactory
+	- App\AdminModule\CzechitasModule\EditLessonModule\Modal\SetLessonTeamModalFactory
+	- App\AdminModule\CzechitasModule\EditLessonModule\Components\SetLessonTeamFormFactory
+	- App\AdminModule\CzechitasModule\EditLessonModule\Components\SetLessonFileFormFactory
+	- App\AdminModule\CzechitasModule\EditLessonModule\Modal\SetLessonFileModalFactory
+	- App\Model\Helpers\Storage\LessonFileStorage(%wwwDir%/assets/upload/lesson-files)
+	- App\AdminModule\CzechitasModule\EditLessonModule\Components\AddHomeworkAssignmentFormFactory
+	- App\AdminModule\CzechitasModule\EditLessonModule\Modal\AddHomeworkAssignmentModalFactory
+	- App\AdminModule\CzechitasModule\EditLessonModule\Components\EditHomeworkAssignmentFormFactory
+	- App\AdminModule\CzechitasModule\EditLessonModule\Modal\EditHomeworkAssignmentModalFactory
+	- App\AdminModule\CzechitasModule\Grid\HomeworkAssignmentGridFactory
+	- App\AdminModule\CzechitasModule\Grid\HomeworkSolutionGridFactory
+	- App\AdminModule\Modal\EditCountdownModalFactory
+	- App\AdminModule\CzechitasModule\Components\Exercise\SetExerciseFormFactory
+	- App\AdminModule\CzechitasModule\Components\CodeShare\SetExerciseFileFormFactory
+	- App\AdminModule\Grid\ExerciseGridFactory
+	- App\AdminModule\CzechitasModule\Modal\Exercise\SetExerciseModalFactory
+
+	# Events
+	- App\Model\Helpers\Event\TestSubscriber
+
+	# Frontend
+	- App\Modal\ShowHomeworkAssignmentModalFactory
+	- App\Components\Homework\ChangeHomeworkStateFactory
+	- App\Components\Profile\EditUserFormFactory
+	- App\Components\Profile\ChangePasswordFormFactory
+	- App\Components\Exercise\ExerciseComponentFactory

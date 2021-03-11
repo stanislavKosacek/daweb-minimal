@@ -1,0 +1,21 @@
+@import "./../massive-template/css/bootstrap.min.css";
+@import "./../massive-template/css/LineIcons.2.0.css";
+@import "./../massive-template/css/animate.css";
+@import "./../massive-template/css/tiny-slider.css";
+@import "./../massive-template/css/glightbox.min.css";
+
+@import "./font-awesome/scss/font-awesome";
+
+@import "plugins/normalize";
+@import "variables";
+@import "images";
+
+
+@import "content";
+@import "header";
+@import "layout";
+@import "footer";
+@import "./plugins/prism.css";
+@import "~lite-youtube-embed/src/lite-yt-embed.css";
+@import "./../massive-template/scss/main";
+@import "custom";

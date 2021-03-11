@@ -1,0 +1,97 @@
+{block content}
+    {varType App\Model\User\User\User $selectedUser}
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <div class="breadcrumbs-content">
+                        {frontendProfilePicture $presenter->getUser()->getIdentity(), 150, $basePath}
+                        <h1 n:block="title" class="page-title">{$selectedUser->getName()} {$selectedUser->getSurname()}</h1>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a n:href="Homepage:default">Úvod</a></li>
+                        <li>Profil</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- Start Contact Area -->
+    <section id="contact-us" class="contact-us section mb-5">
+        <div class="container">
+            <div class="contact-head">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="single-head bg-color-czechitas-secondary">
+                            <form n:name="editUser" class="text-white">
+
+                                <div n:ifcontent>
+                                    <div class="alert alert-danger" n:foreach="$form->getOwnErrors() as $error">{$error}</div>
+                                </div>
+
+                                <div class="form-group has-error">
+                                    <div class="col-sm-12 control-label">{label email/}</div>
+
+                                    <div class="col-sm-0">{input email}
+                                        <span class="text-danger bg-white" n:ifcontent>{inputError email}</span></div>
+                                </div>
+
+                                <div class="form-group has-error">
+                                    <div class="col-sm-12 control-label">{label name/}</div>
+
+                                    <div class="col-sm-0">{input name}
+                                        <span class="text-danger bg-white" n:ifcontent>{inputError name}</span></div>
+                                </div>
+
+                                <div class="form-group has-error">
+                                    <div class="col-sm-12 control-label">{label surname/}</div>
+
+                                    <div class="col-sm-0">{input surname}
+                                        <span class="text-danger bg-white" n:ifcontent>{inputError surname}</span></div>
+                                </div>
+
+                                <div class="form-group has-error my-3">
+                                    <div class="col-sm-12 control-label">{label image/}</div>
+
+                                    <div class="col-sm-0">{input image}
+                                        <span class="text-danger bg-white" n:ifcontent>{inputError image}</span></div>
+                                </div>
+
+                                <div class="form-group has-error">
+                                    <div class="col-sm-12 control-label">{label github/}</div>
+
+                                    <div class="col-sm-0">{input github}
+                                        <span class="text-danger bg-white" n:ifcontent>{inputError github}</span></div>
+                                </div>
+
+                                <div class="form-group has-error">
+                                    <div class="col-sm-12 control-label">{label netlify/}</div>
+
+                                    <div class="col-sm-0">{input netlify}
+                                        <span class="text-danger bg-white" n:ifcontent>{inputError netlify}</span></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12 control-label"></div>
+
+                                    <div class="col-sm-0 button">
+                                        <input n:name="save" class="btn bg-color-czechitas" value="Upravit">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 p-5">
+                        <div class="button">
+                            <a n:href="changePassword" class="btn bg-warning">Změnit heslo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ End Contact Area -->
+{/block}

@@ -1,0 +1,53 @@
+<div class="modal-header">
+	{control close}
+	<h4 class="modal-title">{$title}</h4>
+</div>
+<div class="modal-body">
+	<table>
+		<tr>
+			<td><strong>Odesílatel:</strong></td>
+			<td>{$email->getFrom()}</td>
+		</tr>
+		<tr>
+			<td><strong>Příjemce:</strong></td>
+			<td>{$email->getTo()}</td>
+		</tr>
+		<tr>
+			<td><strong>Předmět:</strong></td>
+			<td>{$email->getSubject()}</td>
+		</tr>
+		{if $email->isError()}
+			<tr style="background-color: rgba(255, 0, 0, 0.7); color: white">
+				<td><strong>Error:</strong></td>
+				<td>{$email->getErrorMessage()}</td>
+			</tr>
+
+			<tr style="background-color: rgba(255, 0, 0, 0.7); color: white">
+				<td><strong>Poslední pokus o odeslání:</strong></td>
+				<td>{if $email->getAgain()}{$email->getAgain()|date: "j.n.Y H:i"}{/if}</td>
+			</tr>
+		{else}
+			<tr>
+				<td><strong>Odesláno:</strong></td>
+				{if $email->getAgain()}
+					<td>{$email->getAgain()|date: "j.n.Y H:i"}</td>
+				{else}
+					<td>{$email->getSent()|date: "j.n.Y H:i"}</td>
+				{/if}
+			</tr>
+		{/if}
+		<tr>
+			<td><strong>Zpráva:</strong></td>
+			<td></td>
+		</tr>
+	</table>
+	<iframe src="{plink :Admin:Email:showEmailBody $email->getId()}" frameborder="0" width="100%" scrolling="no" onload="resizeIframe(this)" >
+	</iframe>
+	<script>
+		function resizeIframe(obj) {
+			obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+		}
+	</script>
+		{*{$email->getBody()|noescape}*}
+
+</div>

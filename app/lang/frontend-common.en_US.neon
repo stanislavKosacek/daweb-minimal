@@ -1,0 +1,5 @@
+test:
+	first: 'Hi'
+	second: 'Test translation'
+menu:
+	contact: 'Contact'

@@ -1,0 +1,11 @@
+{snippet modalsContainer}
+{foreach $modals as $modal}
+	<div n:if="in_array($modal, $showModals)" class="modal inmodal" tabindex="-1" role="dialog" aria-modal="true" id="{$modal}">
+		<div n:class="modal-dialog, $modalClasses[$modal]">
+			<div class="modal-content">
+				{control $modal}
+			</div>
+		</div>
+	</div>
+{/foreach}
+{/snippet}

@@ -1,0 +1,94 @@
+{block content}
+    {varType App\Model\Page\Page\Page $selectedPage}
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 n:block="title" class="page-title">{$selectedPage->getName()}</h1>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a n:href="Homepage:default">Úvod</a></li>
+                        <li>{$selectedPage->getName()}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- Start Contact Area -->
+    <section id="contact-us" class="contact-us section">
+        <div class="container">
+            <div class="contact-head wow fadeInUp" data-wow-delay=".4s">
+                <div class="row">
+                    <div class="col-lg-5 col-12">
+                        <div class="single-head">
+                            <div class="contant-inner-title">
+                                <h4>Contact Information</h4>
+                                <p>Business consulting excepteur sint occaecat cupidatat consulting non proident.</p>
+                            </div>
+                            <div class="single-info">
+                                <i class="lni lni-phone"></i>
+                                <ul>
+                                    <li>+522 672-452-1120</li>
+                                </ul>
+                            </div>
+                            <div class="single-info">
+                                <i class="lni lni-envelope"></i>
+                                <ul>
+                                    <li><a href="mailto:info@yourwebsite.com">example@yourwebsite.com</a></li>
+                                </ul>
+                            </div>
+                            <div class="single-info">
+                                <i class="lni lni-map"></i>
+                                <ul>
+                                    <li>KA-62/1, Travel Agency, 45 Grand Central Terminal, New York.</li>
+                                </ul>
+                            </div>
+                            <div class="contact-social">
+                                <h5>Follow Us on</h5>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon-1"><i class="lni lni-facebook-filled"></i></span>
+                                            <span class="icon-2"><i class="lni lni-facebook-filled"></i></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon-1"><i class="lni lni-twitter-original"></i></span>
+                                            <span class="icon-2"><i class="lni lni-twitter-original"></i></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon-1"><i class="lni lni-linkedin-original"></i></span>
+                                            <span class="icon-2"><i class="lni lni-linkedin-original"></i></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon-1"><i class="lni lni-instagram"></i></span>
+                                            <span class="icon-2"><i class="lni lni-instagram"></i></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon-1"><i class="lni lni-behance-original"></i></span>
+                                            <span class="icon-2"><i class="lni lni-behance-original"></i></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ End Contact Area -->
+{/block}

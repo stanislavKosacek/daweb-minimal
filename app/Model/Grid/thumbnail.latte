@@ -1,0 +1,21 @@
+{if $item instanceOf App\Model\Czechitas\Lesson\Lesson}
+	{varType App\Model\Czechitas\Lesson\Lesson $item}
+	{if $item->getPage()->getImage()}
+		<a href="{img $item->getPage()->getImage()}" data-toggle="lightbox" data-gallery="grid">
+			<picture>
+				<source srcset="{img $item->getPage()->getImage(), resize(200,150,exact)} 2x, {img $item->getPage()->getImage(), resize(100,75,exact)} 1x">
+				<img n:img="$item->getPage()->getImage(), resize(100,75,exact)" width="100" alt="Náhled">
+			</picture>
+		</a>
+	{/if}
+
+{elseif method_exists($item, "getImage")}
+	{if $item->getImage()}
+		<a href="{img $item->getImage()}" data-toggle="lightbox" data-gallery="grid">
+			<picture>
+				<source srcset="{img $item->getImage(), resize(200,150,exact)} 2x, {img $item->getImage(), resize(100,75,exact)} 1x">
+				<img n:img="$item->getImage(), resize(100,75,exact)" width="100" alt="Náhled">
+			</picture>
+		</a>
+	{/if}
+{/if}

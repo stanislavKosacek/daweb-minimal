@@ -1,0 +1,52 @@
+{varType App\Model\Helpers\Comments\ICommentRelatedEntity $commentRelatedEntity}
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="">
+            {foreach $commentRelatedEntity->getComments() as $comment}
+                <div class="feed-element">
+                    <a href="#" class="float-left">
+                        {adminProfilePicture $comment->getUser(), 80}
+                    </a>
+                    <div class="media-body">
+                        {if !$selectedComment or $selectedComment != $comment}
+                        <small class="float-right text-navy commentTime" id="commentTime{$iterator->getCounter()}{$control->getUniqueId()}" data-time="{$comment->getAdded()|date:"YmdHis"}">{$comment->getAdded()|date:("j. n. Y H:i")}</small>
+                        <strong>{$comment->getUser()->getName()} {$comment->getUser()->getSurname()}</strong> přidal komentář: <br>
+                        <small class="text-muted">{$comment->getAdded()|date:("j. n. Y H:i")}</small>
+                        <div class="well">
+                            {block|parsedown}{$comment->getComment()}{/block}
+                        </div>
+                        <div class="float-right">
+                            <a n:if="$comment->getUser() == $user->getIdentity()" n:href="selectComment! $comment->getId()" class="btn btn-xs btn-primary ajax"><i class="fa fa-pencil"></i> Upravit</a>
+                            <a n:href="removeComment! $comment->getId()" class="btn btn-xs btn-danger ajax"><i class="fa fa-trash"></i> Smazat</a>
+                        </div>
+                        {else}
+                            {control editComment}
+                        {/if}
+                    </div>
+                </div>
+                <script>
+		            window.addEventListener('DOMContentLoaded', (event) => {
+			            initCommentTime()
+			            naja.snippetHandler.addEventListener("afterUpdate", function () {
+				            initCommentTime()
+			            });
+		            });
+
+		            function initCommentTime() {
+			            let commentTimes = document.querySelectorAll(".commentTime");
+			            commentTimes.forEach(function (commentTime) {
+				            let update = function () {
+					            window.updateClock(commentTime.getAttribute("id"), commentTime.dataset.time);
+				            }
+				            update();
+				            setInterval(update, 20000);
+			            });
+		            }
+                </script>
+            {/foreach}
+        </div>
+        {if $user->isLoggedIn() and $user->getIdentity()}
+            {control form}
+        {/if}
+    </div>
+</div>

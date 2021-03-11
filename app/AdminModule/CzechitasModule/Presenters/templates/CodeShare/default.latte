@@ -1,0 +1,12 @@
+{block heading}
+    <h2 n:define="title">Sdílení kódu</h2>
+    {include title}
+{/block}
+
+{block actions}
+    <a n:href="add" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat kód</a>
+{/block}
+
+{block content}
+    {control codeShareGrid}
+{/block}

@@ -1,0 +1,104 @@
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: Perfograma;
+	src: url(../fonts/perfograma/perfograma.eot);
+	src: url(../fonts/perfograma/perfograma.eot?#iefix) format("embedded-opentype"), url(../fonts/perfograma/perfograma.woff) format("woff"), url(../fonts/perfograma/perfograma.ttf) format("truetype"), url(../fonts/perfograma/perfograma.svg) format("svg");
+	font-weight: 400;
+	font-style: normal
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	color: white;
+}
+.countdown {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	background-image: url("./../images/czechitas-presentation-background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.countdown__text {
+	position: absolute;
+	left: 8%;
+	top: 50%;
+}
+.countdown__text h1 {
+	font-family: Perfograma, sans-serif;
+	font-size: 6.5rem;
+	margin: 0px;
+}
+
+.countdown__text p {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 4rem;
+	margin: 0px;
+	font-weight: 300;
+}
+
+.settings {
+	position: absolute;
+	display: flex;
+	opacity: 0;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 10px;
+	right: 0%;
+	top: 0%;
+	width: 100%;
+	height: 100px;
+}
+
+.settings .btn {
+	opacity: 0;
+	color: white;
+	background-color: #E5007D;
+	padding: 15px;
+	border-radius: 5px;
+	transition: all 100ms ease-in-out;
+}
+
+.settings .btn:hover {
+	background-color: #bb056a;
+}
+.settings:hover {
+	opacity: 1;
+}
+
+.settings:hover .btn {
+	opacity: 1;
+}
+
+
+@media (max-width: 900px) {
+	.countdown__text h1 {
+		font-size: 3rem;
+	}
+
+	.countdown__text p {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 330px) {
+	.countdown__text h1 {
+		font-size: 2.5rem;
+	}
+
+	.countdown__text p {
+		font-size: 2rem;
+	}
+}

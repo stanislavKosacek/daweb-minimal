@@ -1,0 +1,52 @@
+{varType App\Model\Page\PageBlock\Types\ExercisePageBlock $pageBlock}
+<div class="tabs-container">
+    <ul class="nav nav-tabs" role="tablist">
+        <li><a class="nav-link active" data-toggle="tab" href="#{$control->getUniqueId()}tab-1">Editace</a></li>
+        {*        <li><a class="nav-link" data-toggle="tab" href="#{$control->getUniqueId()}tab-2">Řešení</a></li>*}
+        <li n:if="$pageBlock->getExercise()"><a class="nav-link" data-toggle="tab" href="#{$control->getUniqueId()}tab-3">Výsledek</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" id="{$control->getUniqueId()}tab-1" class="tab-pane active">
+            <div class="row mt-3">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Zadání
+                        </div>
+                        <div class="panel-body">
+                            {control form}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    {foreach $pageBlock->getExercise()->getExerciseSolutionFiles() as $solutionFile}
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                {$solutionFile->getFilename()}
+                            </div>
+                            <div class="panel-body">
+                                {var $solutionFileId = $solutionFile->getId()}
+                                {control editExerciseFile-$solutionFileId}
+                            </div>
+                        </div>
+                    {/foreach}
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Nový soubor s řešením
+                        </div>
+                        <div class="panel-body">
+                            {control newExerciseFile}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div n:if="$pageBlock->getExercise()" role="tabpanel" id="{$control->getUniqueId()}tab-3" class="tab-pane">
+            <div class="panel-body">
+                {block |parsedown}{$pageBlock->getExercise()->getAssignment()}{/block}
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-lg-12 mt-2 mb-2">
+        <div class="solution-file-box">
+            <div n:if="$showHeader" class="solution-file-box-heading">
+                <h5>
+                    {if !Nette\Utils\Strings::contains($selectedCodeShare->getName(), "code")}{$selectedCodeShare->getName()}{else}Zdrojový kód:{/if}
+                </h5>
+                <div class="text-center">
+                    <span id="codeShareTime{$uniqueId}"></span>
+                </div>
+                <script>
+	                window.addEventListener('DOMContentLoaded', (event) => {
+	                	const update = () => {
+			                window.updateClock('codeShareTime' + {$uniqueId}, {$selectedCodeShare->getAdded()|date:"YmdHis"});
+                        }
+                        update();
+		                setInterval(update, 10000);
+	                });
+                </script>
+            </div>
+            <pre class="line-numbers"><code class="language-{$selectedCodeShare->getLanguage()}">{$selectedCodeShare->getTextCode()}</code></pre>
+            <div class="p-2" n:if="!empty($selectedCodeShare->getNote())">
+                <p>{$selectedCodeShare->getNote()}</p>
+            </div>
+        </div>
+    </div>
+</div>

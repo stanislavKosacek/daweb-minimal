@@ -1,0 +1,134 @@
+{varType App\Model\Czechitas\Lesson\Lesson $selectedLesson}
+{block #tab}
+    <div class="row">
+        <div class="col-lg-9">
+            {control editPageBlocks}
+        </div>
+        <div class="col-lg-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Lekce
+                        </div>
+                        <div class="panel-body no-padding">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        {$selectedLesson->getPage()->getName()}
+                                    </span>
+                                    <strong>Název lekce:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        <a n:href="togglePublishedState!" class="ajax">
+                                            {if !$selectedLesson->getPage()->getPublished()}
+                                                Nepublikováno <span class='label label-danger'><i class='fa fa-times-circle'></i></span>
+                                            {elseif $selectedLesson->getPage()->getPublished() <= new DateTimeImmutable()}
+                                                Publikováno {$selectedLesson->getPage()->getPublished()|date:'j. n. Y H:i'} <span class='label label-primary'><i
+                                                        class='fa fa-check-circle'></i></span>
+                                            {elseif $selectedLesson->getPage()->getPublished() > new DateTimeImmutable()}
+                                                Naplánováno {$selectedLesson->getPage()->getPublished()|date:'j. n. Y H:i'} <span class='label label-info'><i
+                                                        class='fa fa-clock-o'></i></span>
+                                            {/if}
+                                        </a>
+                                    </span>
+                                    <strong>Publikováno:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        <a n:href=":Page:default $selectedLesson->getPage()->getId()" target="_blank">{link //:Page:default $selectedLesson->getPage()->getId()} <i
+                                                    class="fa fa-external-link-square"></i></a>
+                                    </span>
+                                    <strong>Odkaz:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        {$selectedLesson->getTranslatedPageType()}
+                                    </span>
+                                    <strong>Typ:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        {$selectedLesson->getDateStart()|date:("j. n. Y H:i")}
+                                    </span>
+                                    <strong>Začátek:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        {$selectedLesson->getDateEnd()|date:("j. n. Y H:i")}
+                                    </span>
+                                    <strong>Konec:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        {$selectedLesson->getPage()->getComments()->countStored()}
+                                    </span>
+                                    <strong>Počet komentářů:</strong>
+                                </li>
+                                <li class="list-group-item" n:if="$selectedLesson->getPage()->getImage()">
+                                    <span class="pull-right">
+                                       <a href="{img $selectedLesson->getPage()->getImage()}" data-toggle="lightbox" data-gallery="grid">
+                                            <picture>
+                                                <source srcset="{img $selectedLesson->getPage()->getImage(), resize(200,150,exact)} 2x, {img $selectedLesson->getPage()->getImage(), resize(100,75,exact)} 1x">
+                                                <img n:img="$selectedLesson->getPage()->getImage(), resize(100,75,exact)" width="100" alt="Náhled">
+                                            </picture>
+                                        </a>
+                                    </span>
+                                    <strong>Obrázek:</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <a n:href="editLesson $selectedLesson->getId()" class="btn btn-primary"><i class="fa fa-pencil"></i> Upravit lekci</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Tým
+                        </div>
+                        <div class="panel-body no-padding">
+                            <div class="p-3">
+                                <table n:if="$selectedLesson->getTeamRoles()->countStored() > 0" class="table">
+                                    <tr>
+                                        <th>Jméno</th>
+                                        <th>Role</th>
+                                        <th></th>
+                                    </tr>
+                                    {foreach $selectedLesson->getTeamRoles() as $teamRole}
+                                        <tr>
+                                            <td>{$teamRole->getUser()->getName()} {$teamRole->getUser()->getSurname()}</td>
+                                            <td>{$teamRole->getTranslatedType()}</td>
+                                            <td><a n:href="removeLessonTeamRole! $teamRole->getId()" class="btn btn-danger btn-xs ajax"><i class="fa fa-trash"></i></a></td>
+                                        </tr>
+                                    {/foreach}
+                                </table>
+                                <a n:href="editTeam $selectedLesson->getId()" class="btn btn-primary">Upravit tým</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            SEO
+                        </div>
+                        <div class="panel-body no-padding">
+                            <div class="p-3">
+                                {control editTargetForm}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+{block #actions}
+    <a n:href="addPageBlock $selectedLesson->getId()" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat blok stránky</a>
+    {include parent}
+{/block}

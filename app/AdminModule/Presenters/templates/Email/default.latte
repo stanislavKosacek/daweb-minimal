@@ -1,0 +1,12 @@
+{block heading}
+    <h2 n:define="title">Email</h2>
+    {include title}
+{/block}
+
+{block actions}
+    <a n:href="sendEmail" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Poslat email</a>
+{/block}
+
+{block content}
+    {control emailGrid}
+{/block}

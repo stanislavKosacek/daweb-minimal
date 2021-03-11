@@ -1,0 +1,76 @@
+{varType App\Model\Czechitas\HomeworkAssignment\HomeworkAssignment $homeworkAssignment}
+<div class="modal-header">
+    <h5 class="modal-title">{$homeworkAssignment->getPage()->getName()}</h5>
+    {control close}
+</div>
+<div class="modal-body">
+
+    <section class="contact-us section mb-4" style="padding: 0px 0px;">
+        <div class="container">
+            <div class="contact-head">
+                <div class="row">
+                    <div class="col-lg-8 col-12">
+                        <div class="single-head">
+                            <table class="table text-white">
+                                <tr>
+                                    <th>Název</th>
+                                    <td>{$homeworkAssignment->getPage()->getName()}</td>
+                                </tr>
+                                <tr>
+                                    <th>Složka pro odevzdání</th>
+                                    <td>tvůj-github-repozitář/{$homeworkAssignment->getGitFolder()}</td>
+                                </tr>
+                                <tr>
+                                    <th>Deadline</th>
+                                    <td>{if $homeworkAssignment->getDeadline()}{$homeworkAssignment->getDeadline()|date:"j. n. Y"}{else}Není nastaven{/if}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <div style="padding: 50px 50px 50px 0px;">
+                            <table class="table text-center">
+                                <tr>
+                                    <th>Stav</th>
+                                </tr>
+                                <tr>
+                                    <td>{control homeworkState}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-us">
+        <div class="about-left">
+            <div class="about-tab">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li n:if="$homeworkSolution" class="nav-item"><a class="nav-link active" data-toggle="tab" href="#t-tab1" role="tab" aria-selected="true">Zadání úkolu</a></li>
+                    <li n:if="$homeworkSolution" class="nav-item"><a class="nav-link" data-toggle="tab" href="#t-tab2" role="tab" aria-selected="false">Komentáře ({$homeworkSolution->getComments()->countStored()})</a></li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade active show" id="t-tab1" role="tabpanel">
+                        <div class="tab-content">
+                            {foreach $homeworkAssignment->getPage()->getPageBlocks() as $pageBlock}
+                                {var $pageBlockId = $pageBlock->getId()}
+                                {control frontendBlockComponent-$pageBlockId}
+                            {/foreach}
+                        </div>
+                    </div>
+                    <div n:if="$homeworkSolution" class="tab-pane fade" id="t-tab2" role="tabpanel">
+                        <div class="tab-content">
+                            {control comments}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+</div>

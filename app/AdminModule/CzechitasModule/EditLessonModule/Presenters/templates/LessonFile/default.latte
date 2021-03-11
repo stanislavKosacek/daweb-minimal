@@ -1,0 +1,25 @@
+{varType App\Model\Czechitas\Lesson\Lesson $selectedLesson}
+{block #tab}
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>Název</th>
+            <th>Popis</th>
+            <th></th>
+        </tr>
+        {foreach $selectedLesson->getFiles() as $file}
+            <tr>
+                <td>{$file->getName()}</td>
+                <td>{$file->getDescription()}</td>
+                <td>
+                    <a n:href="editFile $selectedLesson->getId(), $file->getId()" class="btn btn-primary ajax"><i class="fa fa-pencil"></i></a>
+                    <a href="{$basePath}/{$file->getNameWithPath()}" target="_blank" class="btn btn-default"><i class="fa fa-download"></i></a>
+                    <a n:href="deleteLessonFile! $file->getId()" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {/foreach}
+    </table>
+{/block}
+{block #actions}
+    <a n:href="addFile $selectedLesson->getId()" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat soubor</a>
+    {include parent}
+{/block}

@@ -1,0 +1,12 @@
+sentry:
+	title: "Nastala interní chyba serveru - 500"
+	subtitle: "Náš tým byl již informován. Pokud chcete pomoci, napište nám co se stalo."
+	subtitle2: ""
+	labelName: 'Jméno'
+	labelEmail: 'Email'
+	labelComments: 'Popište co se stalo'
+	labelClose: 'Zavřít'
+	labelSubmit: 'Odeslat'
+	errorGeneric: 'Nastala chyba při odesílání reportu. Zkuste to prosím později.'
+	errorFormEntry: 'Některé pole jsou špatně vyplněné.'
+	successMessage: 'Vaše zpětná vazba byla odeslána. Děkujeme!'

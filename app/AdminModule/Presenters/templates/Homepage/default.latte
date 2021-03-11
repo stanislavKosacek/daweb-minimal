@@ -1,0 +1,64 @@
+{block heading}
+    <h2 n:define="title">Přehled</h2>
+    {include title}
+{/block}
+
+{block actions}
+    {*    <a n:href="add $monthShift" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat příjem</a>*}
+{/block}
+
+{block content}
+{*    <div class="ibox ">*}
+{*        <div class="ibox-content">*}
+{*            <div class="table-responsive">*}
+{*                <div id="calendar"></div>*}
+{*            </div>*}
+{*        </div>*}
+{*    </div>*}
+
+{/block}
+
+{block scripts}
+	{*
+    <script>
+		let calendar = new Calendar(document.getElementById("calendar"), {
+			locale: csLocale,
+			plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
+			initialView: 'dayGridMonth',
+			nowIndicator: true,
+			displayEventTime: true,
+			displayEventEnd: true,
+			slotMinTime: "07:00:00",
+			slotMaxTime: "21:00:00",
+			eventTimeFormat: {
+				hour: "2-digit",
+				minute: "2-digit",
+			},
+			headerToolbar: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'dayGridMonth,timeGridWeek'
+			},
+			eventSources: [
+				{
+					events: {$calendarEvents}
+				}
+			],
+			eventClick: function (event) {
+				if (event.event.extendedProps.lessonDetail) {
+					window.location.href = event.event.extendedProps.lessonDetail;
+				}
+			},
+			eventMouseEnter: function (event) {
+				if (event.event.extendedProps.lessonDetail) {
+					event.el.style.cursor = "Pointer";
+				} else {
+
+				}
+			},
+		});
+
+		calendar.render();
+    </script>
+	*}
+{/block}

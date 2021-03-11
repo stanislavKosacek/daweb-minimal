@@ -1,0 +1,56 @@
+{varType App\Model\Czechitas\Exercise\Exercise $exercise}
+<div class="row border">
+    <div class="col-lg-12 mt-2 mb-2">
+        <div class="px-3 py-3">
+            <div class="row">
+                <div class="col-3">
+                    <h3 class="mb-3 font-bold">{if $exercise->getOrderInLesson()}{$exercise->getOrderInLesson()}. {/if}{$exercise->getName()}</h3>
+                </div>
+                <div class="col-9 parsedown exercise--assignment">
+                    {block |parsedown}{$exercise->getAssignment()|noescape}{/block}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-12 mt-2 mb-2">
+        <div class="about-us">
+            <div class="about-left">
+                {if !$user->isInRole("admin") and !$exercise->isPublishedSolution()}
+                    <div class="px-3 py-3">
+                        Řešení zatím nebylo publikováno. (Pokud jsi kouč nebo lektor, tak se můžeš pro zobrazení řešení <a href="{plink Sign:in $presenter->storeRequest()}">přihlásit</a>).
+                    </div>
+                {else}
+                    <div class="about-tab px-3 py-3" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                        <div class="row">
+                            <h3 class="mb-3">Řešení</h3>
+                            <div class="col-3">
+                                <ul class="nav nav-tabs flex-column" id="myTab{$exercise->getId()}" role="tablist">
+                                    {foreach $exercise->getExerciseSolutionFiles() as $solutionFile}
+                                        <li class="nav-item mb-1">
+                                            <a class="nav-link{if $iterator->first} active{/if} text-left" data-toggle="tab" href="#solution{$solutionFile->getId()}" role="tab"
+                                               aria-selected="true">
+                                                {$solutionFile->getFilename()}
+                                            </a>
+                                        </li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                            <div class="tab-content col-9" id="myTabContent{$exercise->getId()}">
+                                {foreach $exercise->getExerciseSolutionFiles() as $solutionFile}
+                                    <div class="tab-pane fade{if $iterator->first} active show{/if}" id="solution{$solutionFile->getId()}" role="tabpanel">
+                                        <div class="tab-content">
+                                            <div class="solution-file-box">
+                                                <pre class="line-numbers"><code class="language-{$solutionFile->getLanguage()}">{$solutionFile->getCode()}</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {/foreach}
+                            </div>
+                        </div>
+                    </div>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+{varType App\Model\Czechitas\Exercise\Exercise $exercise}
+{block heading}
+    <h2 n:define="title">{$exercise->getName()}</h2>
+    {include title}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a n:href=":Admin:Exercise:default">Civčení</a>
+        </li>
+        <li class="breadcrumb-item">
+            <strong>{$exercise->getName()}</strong>
+        </li>
+    </ol>
+{/block}
+
+
+{block content}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Zadání
+                </div>
+                <div class="panel-body">
+                    {control editExercise}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Řešení
+                </div>
+                <div class="panel-body">
+            {foreach $exercise->getExerciseSolutionFiles() as $solutionFile}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        {$solutionFile->getFilename()}
+                    </div>
+                    <div class="panel-body">
+                        {var $solutionFileId = $solutionFile->getId()}
+                         {control editExerciseFile-$solutionFileId}
+                    </div>
+                </div>
+            {/foreach}
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Nový soubor s řešením
+                </div>
+                <div class="panel-body">
+                    {control newExerciseFile}
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{/block}

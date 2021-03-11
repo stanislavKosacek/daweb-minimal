@@ -1,0 +1,42 @@
+{varType App\Model\Helpers\Comments\ICommentRelatedEntity $commentRelatedEntity}
+<div class="post-comments">
+    <h3 class="comment-title">Komentáře</h3>
+    <ul class="comments-list">
+        {foreach $commentRelatedEntity->getComments() as $comment}
+            <li class="comment-item">
+                <div class="comment-img">
+                    {frontendProfilePicture $comment->getUser(), 100, $basePath}
+                </div>
+                <div class="comment-desc">
+                    <div class="desc-top">
+                        <h6>{$comment->getUser()->getName()} {$comment->getUser()->getSurname()}</h6>
+                        <span class="date">{$comment->getAdded()|date: 'j. n. Y H:i'}</span>
+                    </div>
+                    <div class="p-3 border comment-text">
+                    {block|parsedown}{$comment->getComment()}{/block}
+                    </div>
+                </div>
+            </li>
+        {/foreach}
+    </ul>
+    {if $presenter->getUser()->isLoggedIn()}
+        <div class="mt-5">
+
+    <form n:name="form">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-box form-group">
+                    {label comment}
+                    {input comment}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="button">
+                    {input submit}
+                </div>
+            </div>
+        </div>
+    </form>
+        </div>
+    {/if}
+</div>

@@ -1,0 +1,66 @@
+{block heading}
+    <h2 n:define="title">Nastavení</h2>
+    {include title}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <span>Nastavení</span>
+        </li>
+    </ol>
+{/block}
+
+{block content}
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Uživatelé</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul>
+                                <li><a n:href=":Admin:Settings:User:default">Uživatelé</a></li>
+                                <li><a n:href=":Admin:Settings:Role:default">Role</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Web</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul>
+                                <li><a n:href=":Admin:Settings:Image:default">Obrázky</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>SEO</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul>
+                                <li><a n:href=":Admin:Settings:Url:default">URL</a></li>
+                                <li><a n:href=":Admin:Settings:Redirect:default">Redirects</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

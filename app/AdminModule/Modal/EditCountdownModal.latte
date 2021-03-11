@@ -1,0 +1,85 @@
+<div class="modal-header">
+	{control close}
+	<h4 class="modal-title" id="timer"></h4>
+</div>
+<div class="modal-body">
+	<div class="row text-center">
+		<div class="col-3 p-3">
+			<a n:href="reset!" class="btn btn-primary"><i class="fa fa-repeat"></i> Reset na 10 minut</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="reset! 30" class="btn btn-primary"><i class="fa fa-repeat"></i> Reset na 30 minut</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="reset! 45" class="btn btn-primary"><i class="fa fa-repeat"></i> Reset na 45 minut</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="reset! 60" class="btn btn-primary"><i class="fa fa-repeat"></i> Reset na 60 minut</a><br>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="plus!" class="btn btn-primary"><i class="fa fa-plus"></i> 1 minuta</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="plus! 5" class="btn btn-primary"><i class="fa fa-plus"></i> 5 minut</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="plus! 10" class="btn btn-primary"><i class="fa fa-plus"></i> 10 minut</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="plus! 20" class="btn btn-primary"><i class="fa fa-plus"></i> 20 minut</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="minus!" class="btn btn-primary"><i class="fa fa-minus"></i> 1 minuta</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="minus! 5" class="btn btn-primary"><i class="fa fa-minus"></i> 5 minut</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="minus! 10" class="btn btn-primary"><i class="fa fa-minus"></i> 10 minut</a>
+		</div>
+		<div class="col-3 p-3">
+			<a n:href="minus! 20" class="btn btn-primary"><i class="fa fa-minus"></i> 20 minut</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			{control form}
+		</div>
+		<div class="col-12">
+			{control formText}
+		</div>
+	</div>
+</div>
+
+<script>
+	const timerElm = document.querySelector('#timer');
+
+	const printTime = (endTime, element) => {
+		let end = new Date(endTime).getTime();
+		let now = new Date().getTime();
+		const distance = end - now;
+
+		//var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+		if (seconds < 0) {
+			minutes = 0;
+			seconds = 0;
+		}
+
+		element.textContent = `${ String(minutes).padStart(2, '0')} : ${ String(seconds).padStart(2, '0')}`;
+	}
+
+	const getEndTime = () => {
+		fetch({link getEnd!})
+				.then(response => response.json())
+				.then(data => {
+					console.log((data));
+					printTime(data.time, timerElm);
+					setTimeout(getEndTime, 1000);
+				});
+	}
+
+	getEndTime()
+</script>

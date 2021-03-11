@@ -1,0 +1,68 @@
+{block content}
+    <section id="contact-us" class="contact-us section">
+        <div class="container">
+            <div class="section-title p-2">
+                <h1 n:block="title" class="color-czechitas-secondary">Registrace DA WEB ČB</h1>
+            </div>
+            <div class="contact-head" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                <div class="row">
+                    <div class="col-lg-5 col-12">
+                        <div class="single-head">
+                            <div class="contant-inner-title">
+                                <img src="{$basePath}/src/front/images/logo-white.png" width="100px" alt="Czechitas logo">
+                                <h2 class="text-white my-5">Registrace</h2>
+                                <p>Po provedení registrace se prosím zatím nezkoušej přihlašovat. Tvá registrace bude brzy schválena, poté ti zašleme email s informací, že byl tvůj
+                                    účet aktivován.</p>
+                                <p>Ideální bude, když pro registraci použiješ stejnou emailovou adresu, na které s tebou již komunikujeme.</p>
+                                <p>Pokud již máš registraci schválenou, můžeš pokračovat na <a n:href="in" class="color-czechitas-secondary ajax"><strong>přihlášení</strong></a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-12">
+                        <div class="form-main">
+                            <form n:name="signUpForm" class="form">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            {label name}
+                                            {input name}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            {label surname}
+                                            {input surname}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            {label email}
+                                            {input email}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            {label password}
+                                            {input password}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            {label password2}
+                                            {input password2}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group button">
+                                            <button n:name="signUp" class="btn ">Registrovat se</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{/block}

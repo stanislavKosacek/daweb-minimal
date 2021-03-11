@@ -1,0 +1,12 @@
+{block heading}
+    <h2 n:define="title">Lekce</h2>
+    {include title}
+{/block}
+
+{block actions}
+    <a n:href="add" id="ladda-button-demo" class="ladda-button ladda-button-demo btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat lekci</a>
+{/block}
+
+{block content}
+    {control lessonGrid}
+{/block}

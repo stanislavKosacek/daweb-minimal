@@ -1,0 +1,33 @@
+{block content}
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 n:block="title" class="page-title">{$selectedPage->getName()}</h1>
+                        <p>Tato stránka není publikována</p>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a n:href="Homepage:default">Úvod</a></li>
+                        <li>{$selectedPage->getName()}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="error-page section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="error-text">
+                        <h2><span>Omlouváme se!</span>Tato stránka není dostupná</h2>
+                        <div class="button">
+                            <a n:href="Homepage:default" class="btn">Zpět na domovskou stránku</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{/block}

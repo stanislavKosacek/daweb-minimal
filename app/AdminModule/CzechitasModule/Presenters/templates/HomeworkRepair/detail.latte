@@ -1,0 +1,21 @@
+{block heading}
+    <h2 n:define="title">Oprava úkolů - {$homeworkAssignment->getPage()->getName()} ({$homeworkAssignment->getLesson()->getTranslatedPageType()})</h2>
+    {include title}
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a n:href=":Admin:Czechitas:HomeworkRepair:default">Oprava úkolů</a>
+        </li>
+        <li class="breadcrumb-item">
+            <strong>{$homeworkAssignment->getPage()->getName()}</strong>
+        </li>
+    </ol>
+{/block}
+
+{block actions}
+    {*    <a n:href="add" id="ladda-button-demo" class="ladda-button ladda-button-demo btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat lekci</a>*}
+{/block}
+
+{block content}
+    {control homeworkSolutionGrid}
+{/block}

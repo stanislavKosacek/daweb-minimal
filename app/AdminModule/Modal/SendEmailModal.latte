@@ -1,0 +1,50 @@
+<div class="modal-header">
+    {control close}
+    <h4 class="modal-title">{$title}</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-lg-6">{control form}</div>
+        <div class="col-lg-6">
+            <div id="iframe"></div>
+        </div>
+    </div>
+</div>
+
+{block scripts}
+    <script>
+		let button = document.querySelector("#test");
+		let iframe = document.createElement('iframe');
+		iframe.style.width = "100%";
+		let iframeDiv = document.querySelector("#iframe");
+
+		let lastInserted = " ";
+
+		document.addEventListener('DOMContentLoaded', function () {
+			loadEmailThumbnail();
+			setInterval(loadEmailThumbnail, 5000);
+		})
+
+
+		function loadEmailThumbnail() {
+			let markdown = document.querySelector("#markdownBody");
+			if (lastInserted != markdown.value) {
+				window.naja.makeRequest("POST", {link test!}, { body: markdown.value}, { history: false})
+					.then((data) => {
+						iframeDiv.appendChild(iframe);
+						iframe.contentWindow.document.open();
+						iframe.contentWindow.document.write(data);
+						iframe.contentWindow.document.close();
+						resizeIframe(iframe);
+					});
+			}
+			lastInserted = markdown.value;
+		}
+
+
+		function resizeIframe(obj) {
+			obj.style.height = obj.contentWindow.document.body.scrollHeight + 10 + 'px';
+		}
+    </script>
+
+{/block}

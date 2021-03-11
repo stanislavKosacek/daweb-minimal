@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="no-js" lang="cs">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
+	<meta name="author" content="Stanislav Kosáček">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Czechitas php 20">
+	<link rel="apple-touch-icon" sizes="57x57" href="{$basePath}/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="{$basePath}/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="{$basePath}/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="{$basePath}/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="{$basePath}/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="{$basePath}/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="{$basePath}/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="{$basePath}/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="{$basePath}/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="{$basePath}/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="{$basePath}/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="{$basePath}/favicon/favicon-16x16.png">
+	<link rel="shortcut icon" href="{$basePath}/favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="{$basePath}/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<!-- Place favicon.ico in the root directory -->
+
+	<div n:snippet="title">
+		{if $currentTarget and $currentTarget->getTitle()}<title>{$currentTarget->getTitle()}</title>
+			<meta n:if="$currentTarget->getDescription()" name="description" content="{$currentTarget->getDescription()}">
+		{else}<title>{ifset title}{include title|stripHtml} | {/ifset} DaWeb - JS</title>{/if}
+	</div>
+
+	<!-- Web Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		  rel="stylesheet">
+
+	<!-- ========================= CSS here ========================= -->
+	<link href="{webpack front.css}" rel="stylesheet">
+
+</head>
+
+<body>
+{*
+<script>
+	var pageInitializer = {
+		initialized: false,
+		before: {},
+		beforeCounter: {},
+		after: {},
+		afterCounter: {},
+		register: function (callback, name, section) {
+			section = (typeof section == "undefined") ? "after" : section;
+			this[section][name] = callback;
+			if (this.initialized) {
+				this.perform(callback, name, section);
+			}
+		},
+		perform: function (callback, name, section) {
+			callback(name);
+			if (this[section + "Counter"][name] == undefined) {
+				this[section + "Counter"][name] = 1;
+			} else {
+				this[section + "Counter"][name]++;
+			}
+		}
+	};
+</script>
+*}
+<!--[if lte IE 9]>
+<p class="browserupgrade">
+	You are using an <strong>outdated</strong> browser. Please
+	<a href="https://browsehappy.com/">upgrade your browser</a> to improve
+	your experience and security.
+</p>
+<![endif]-->
+{*
+<!-- Preloader -->
+<div class="preloader">
+	<div class="preloader-inner">
+		<div class="preloader-icon">
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+</div>
+<!-- /End Preloader -->
+*}
+
+{snippet heading}
+	{include '@header.latte'}
+{/snippet}
+
+{snippet content}
+{include content}
+
+<!-- Start Footer Area -->
+<footer n:if="!$presenter->isLinkCurrent('Sign:*')" class="footer">
+	<!-- Start Footer Bottom -->
+	<div class="footer-bottom">
+		<div class="container">
+			<div class="inner">
+				<div class="row align-items-center">
+					<div class="col-12">
+						<p>Czechitas | Digitální akademie: Web 2021 | České Budějovice</p>
+					</div>
+					{*
+					<div class="col-6">
+						<div class="logo mb-0 text-left">
+							<a n:href="Homepage:default"><img src="{$basePath}/src/front/images/logo-white.png" alt="Logo"></a>
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="footer-social mt-0 text-right">
+							<ul>
+								<li><a href="#"><i class="lni lni-facebook"></i></a></li>
+								<li><a href="#"><i class="lni lni-youtube"></i></a></li>
+							</ul>
+						</div>
+					</div>
+					*}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Footer Middle -->
+</footer>
+<!--/ End Footer Area -->
+	{control modalContainer}
+{/snippet}
+
+<!-- ========================= scroll-top ========================= -->
+<a n:if="!$presenter->isLinkCurrent('Sign:*')" href="#" class="scroll-top btn-hover">
+	<i class="lni lni-chevron-up"></i>
+</a>
+
+<!-- ========================= JS here ========================= -->
+{*
+<script src="src/front/massive-template/js/bootstrap.min.js"></script>
+<script src="src/front/massive-template/js/count-up.min.js"></script>
+<script src="src/front/massive-template/js/wow.min.js"></script>
+<script src="src/front/massive-template/js/tiny-slider.js"></script>
+<script src="src/front/massive-template/js/glightbox.min.js"></script>
+<script src="src/front/massive-template/js/imagesloaded.min.js"></script>
+<script src="src/front/massive-template/js/isotope.min.js"></script>
+<script src="{$basePath}/src/front/js/plugins/prism.js"></script>
+*}
+<script src="{webpack front.js}"></script>
+
+{snippet scripts}
+{block scripts}
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			raiseModal();
+		})
+
+		naja.snippetHandler.addEventListener("afterUpdate", function () {
+			raiseModal();
+			pageLazyLoad.update();
+		});
+
+		function raiseModal() {
+			var el = document.querySelector(".inmodal");
+			var close = document.querySelector('.inmodal .close-modal');
+
+			if (el) {
+				var modal = new Modal(el);
+				modal.show();
+				// showModal.modal();
+				el.addEventListener('hide.bs.modal', function (e) {
+					if (!e.target.classList.contains("datepicker")) {
+						close.click();
+					}
+				});
+			}
+		}
+
+	</script>
+{/block}
+{/snippet}
+
+{*
+<script type="text/javascript">
+	for (var callbackName in pageInitializer.after) {
+		pageInitializer.perform(pageInitializer.after[callbackName], callbackName, "after");
+	}
+	pageInitializer.initialized = true;
+	//========= glightbox
+	GLightbox({
+		'href': 'https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM',
+		'type': 'video',
+		'source': 'youtube', //vimeo, youtube or local
+		'width': 900,
+		'autoplayVideos': true,
+	});
+</script>
+*}
+</body>
+
+</html>
+{*
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" media="screen,projection,tv" href="{webpack "front.css"}">
+
+	<title n:snippet="title">{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+</head>
+
+<body>
+	{snippet flashes}
+		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+	{/snippet}
+	{snippet content}
+		{include content}
+	{/snippet}
+
+	{block scripts}
+		<script src="{webpack "front.js"}"></script>
+
+	{/block}
+</body>
+</html>
+*}

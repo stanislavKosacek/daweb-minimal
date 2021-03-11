@@ -1,0 +1,116 @@
+modal:
+	cancel: "Zrušit"
+	yes: "Ano"
+	no: "Zrušit"
+	headline: "Potvrdit volbu"
+	confirm:
+		deleteUser: 'Opravdu si přejete smazat tohoto uživatele?'
+	flashes:
+		userRemoved: 'Uživatel byl smazán'
+
+user:
+	users: 'Uživatelé'
+	addUser: 'Přidat uživatele'
+	editUser: 'Upravit uživatele'
+	add: 'Přidat uživatele'
+	edit: 'Upravit uživatele'
+	setUser:
+		add: 'Přidat'
+		edit: 'Upravit'
+		required: 'Povinná pole'
+		notRequired: 'Nepovinná pole'
+		email: 'Email'
+		password: 'Heslo'
+		password2: 'Heslo znovu'
+		name: 'Jméno'
+		surname: 'Příjmení'
+		dateBirth: 'Datum narození'
+		phone: 'Telefon'
+		note: 'Poznámka'
+		image: 'Profilový obrázek'
+		flashes:
+			added: 'Uživatel byl přidán'
+			edited: 'Uživatel byl upraven'
+
+
+sign:
+	createAccount: 'Zaregistrujte se pomocí:'
+	emailRegistration: 'nebo pomocí emailu'
+	username: 'Uživatelské jméno'
+	email: 'Email'
+	password: 'Heslo'
+	signUp: 'Zaregistrovat se'
+	signIn: 'Přihlásit se'
+	emailSignIn: 'nebo použijte Vaše přihlašovací údaje'
+	forgotPassword: 'Zapomněli jste heslo?'
+	hello: 'Ahoj'
+	signInSub2: 'Zadejte své přihlaovací údaje a můžete začít.'
+	signInSub3: 'Nemáte ještě účet?'
+	signUpSub2: 'Již máte účet?'
+	errors:
+		emailExist: 'Uživatel s tímto emailem již existuje'
+		usernameExist: 'Uživatel s tímto uživatelským jménem již existuje'
+		usernameShort: 'Uživatelské jméno musí obsahovat alespoň 3 znaky'
+		password: 'Heslo musí mít délku nejméně 8 znaků a musí obsahovat alespoň jedno velké písmeno, jedno malé písmeno a jedno číslo nebo speciální znak.'
+
+flashMessage:
+	loginSuccess: 'Přihlášení proběhlo úspěšně'
+	logoutSuccess: 'Odhlášeno'
+
+settings:
+	settings: 'Nastavení'
+	currencies: 'Měny'
+	email:
+		emailSettings: 'Nastavení emailů'
+		emailsender: 'Odesílatel emailu'
+		emailTypes: 'Typy emailů'
+		addEmailSender: 'Přidat odesílatele emailu'
+		setEmailSender:
+			addEmailSender: 'Přidat odesílatele'
+			editEmailSender: 'Upravit odesílatele'
+			address: 'Emailová adresa'
+			hash: 'Hash'
+			add: 'Přidat'
+			edit: 'Upravit'
+			flashes:
+				added: 'Odesílatel emailu byl přidán'
+				edited: 'Odesílatel emailu byl upraven'
+	language:
+		languages: 'Jazyky'
+		add: 'Přidat jazyk'
+
+
+email:
+	emails: 'Emaily'
+	showEmail: 'Detail emailu'
+	newEmail: 'Nový email'
+	sendEmail: 'Odeslat email'
+	sendEmailForm:
+		to: 'Příjemce'
+		from: 'Odesílatel'
+		subject: 'Předmět'
+		body: 'Text'
+		send: 'Odeslat'
+		emailSanded: 'Email byl odeslán'
+
+dayOfWeek:
+	1: 'Pondělí'
+	2: 'Úterý'
+	3: 'Středa'
+	4: 'Čtvrtek'
+	5: 'Pátek'
+	6: 'Sobota'
+	7: 'Neděle'
+months:
+	1: 'Leden'
+	2: 'Únor'
+	3: 'Březen'
+	4: 'Duben'
+	5: 'Květen'
+	6: 'Červen'
+	7: 'Červenec'
+	8: 'Srpen'
+	9: 'Září'
+	10: 'Říjen'
+	11: 'Listopad'
+	12: 'Prosinec'

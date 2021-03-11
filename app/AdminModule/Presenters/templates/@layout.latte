@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
+    <meta name="author" content="Stanislav Kosáček">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Czechitas php 20">
+    <link rel="apple-touch-icon" sizes="57x57" href="{$basePath}/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="{$basePath}/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{$basePath}/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{$basePath}/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{$basePath}/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{$basePath}/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="{$basePath}/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{$basePath}/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{$basePath}/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{$basePath}/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="{$basePath}/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{$basePath}/favicon/favicon-16x16.png">
+    <link rel="manifest" href="{$basePath}/favicon/manifest.json">
+    <link rel="shortcut icon" href="{$basePath}/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{$basePath}/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <title n:snippet="title">{ifset title}{include title|stripHtml} | {/ifset} DA WEB CB</title>
+    <link href="{webpack admin.css}" rel="stylesheet">
+
+</head>
+
+<body class="fixed-sidebar md-skin">
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse" n:snippet="sidebar">
+            {include '@sidebar.latte'}
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        {include '@topbar.latte'}
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-8" n:inner-ifset="#heading" n:snippet="heading">
+                {include heading}
+            </div>
+            <div class="col-lg-4 text-right">
+                <div class="title-action" n:inner-ifset="#actions" n:snippet="actions">
+                    {include actions}
+                </div>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content" n:snippet="content">
+            {include content}
+        </div>
+
+    </div>
+    {control modalContainer}
+</div>
+
+
+<!-- Mainly scripts -->
+<script src="{$basePath}/src/admin/js/inspinia_js/jquery-3.1.1.min.js"></script>
+<script src="{$basePath}/src/admin/js/inspinia_js/popper.min.js"></script>
+<script src="{$basePath}/src/admin/js/inspinia_js/bootstrap.min.js"></script>
+<script src="{$basePath}/src/admin/js/inspinia_js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="{$basePath}/src/admin/js/inspinia_js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{$basePath}/src/admin/js/inspinia_js/plugins/livequery.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{$basePath}/src/admin/js/inspinia_js/inspinia.js"></script>
+<script src="{$basePath}/src/admin/js/inspinia_js/plugins/pace/pace.min.js"></script>
+
+
+{*grid*}
+
+
+<script src="{$basePath}/src/admin/js/inspinia/plugins/bootstrap_select.js"></script>
+<script src="{$basePath}/src/admin/js/inspinia/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+
+{*<script src="{$basePath}/src/admin/js/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>*}
+
+{*<script src="{$basePath}/src/admin/js/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.cs.min.js"></script>*}
+
+{*<script src="{$basePath}/src/front/js/plugins/prism.js"></script>*}
+<script src="{webpack admin.js}"></script>
+
+
+
+{snippet scripts}
+    {block scripts}
+
+    {/block}
+    <script>
+		var showModal = $(".inmodal");
+		var close = document.querySelector('.inmodal .close-modal');
+
+		if (showModal) {
+			showModal.modal();
+			showModal.on('hide.bs.modal', function (e) {
+				if (!e.target.classList.contains("datepicker")) {
+					close.click();
+				}
+			});
+		}
+
+		LiveFormOptions = {
+			messageErrorPrefix: 'Error: ',
+			wait: 500
+		};
+
+		document.addEventListener('DOMContentLoaded', function () {
+			$("body select:not([name=perPage],[data-grid=true])").selectpicker();
+			$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+				event.preventDefault();
+				$(this).ekkoLightbox({
+					alwaysShowClose: true,
+				});
+			});
+		});
+
+		naja.snippetHandler.addEventListener("afterUpdate", function () {
+			$("body select:not([name=perPage],[data-grid=true])").selectpicker();
+			$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+				event.preventDefault();
+				$(this).ekkoLightbox({
+					alwaysShowClose: true,
+				});
+			});
+		});
+
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+        
+    </script>
+{/snippet}
+
+{snippet flashes}
+    {if !empty($flashes)}
+        <script type="text/javascript">
+            {foreach $flashes as $flash}
+            {if $flash->type === "success"}
+			toastr.success({$flash->message});
+            {elseif $flash->type === "error"}
+			toastr.error({$flash->message});
+            {elseif $flash->type === "warning"}
+			toastr.warning({$flash->message});
+            {else}
+			toastr.info({$flash->message});
+            {/if}
+            {/foreach}
+        </script>
+    {/if}
+{/snippet}
+
+</body>
+
+</html>

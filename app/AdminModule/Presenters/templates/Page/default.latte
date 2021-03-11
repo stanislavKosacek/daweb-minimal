@@ -1,0 +1,12 @@
+{block heading}
+    <h2 n:define="title">Stránky</h2>
+    {include title}
+{/block}
+
+{block actions}
+    <a n:href="addPage" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat stránku</a>
+{/block}
+
+{block content}
+    {control pageGrid}
+{/block}

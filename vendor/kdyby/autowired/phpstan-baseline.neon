@@ -1,0 +1,71 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot access offset string on Iterator\\.$#"
+			count: 1
+			path: tests/KdybyTests/Autowired/mocks/IntegrationPresenter.php
+
+		-
+			message: "#^Property KdybyTests\\\\Autowired\\\\IntegrationPresenter\\:\\:\\$autowireProperties type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/KdybyTests/Autowired/mocks/IntegrationPresenter.php
+
+		-
+			message: "#^Method KdybyTests\\\\Autowired\\\\IntegrationPresenter\\:\\:injectProperties\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/KdybyTests/Autowired/mocks/IntegrationPresenter.php
+
+		-
+			message: "#^Method KdybyTests\\\\Autowired\\\\IntegrationPresenter\\:\\:validateProperty\\(\\) has parameter \\$ignore with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/KdybyTests/Autowired/mocks/IntegrationPresenter.php
+
+		-
+			message: "#^Call to an undefined method Nette\\\\Reflection\\\\Property\\:\\:hasType\\(\\)\\.$#"
+			count: 1
+			path: tests/KdybyTests/Autowired/mocks/IntegrationPresenter.php
+
+		-
+			message: "#^Call to an undefined method Nette\\\\Reflection\\\\Property\\:\\:getType\\(\\)\\.$#"
+			count: 1
+			path: tests/KdybyTests/Autowired/mocks/IntegrationPresenter.php
+
+		-
+			message: "#^Call to an undefined method ReflectionType\\:\\:getName\\(\\)\\.$#"
+			count: 2
+			path: tests/KdybyTests/Autowired/mocks/IntegrationPresenter.php
+
+		-
+			message: "#^Method KdybyTests\\\\Autowired\\\\IntegrationPresenter\\:\\:createComponentSilly\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/KdybyTests/Autowired/mocks/IntegrationPresenter.php
+
+		-
+			message: "#^Method Kdyby\\\\Autowired\\\\DI\\\\AutowiredExtension\\:\\:register\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Kdyby/Autowired/DI/AutowiredExtension.php
+
+		-
+			message: "#^Method Kdyby\\\\Autowired\\\\Diagnostics\\\\Panel\\:\\:registerBluescreen\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Kdyby/Autowired/Diagnostics/Panel.php
+
+		-
+			message: "#^Method Kdyby\\\\Autowired\\\\Diagnostics\\\\Panel\\:\\:renderException\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Kdyby/Autowired/Diagnostics/Panel.php
+
+		-
+			message: "#^Cannot access offset 0 on array\\<int, string\\>\\|false\\.$#"
+			count: 1
+			path: src/Kdyby/Autowired/PhpDocParser.php
+
+		-
+			message: "#^Cannot access offset 1 on array\\<int, string\\>\\|false\\.$#"
+			count: 1
+			path: src/Kdyby/Autowired/PhpDocParser.php
+
+		-
+			message: "#^Binary operation \"\\*\" between 1 and string results in an error\\.$#"
+			count: 2
+			path: src/Kdyby/Autowired/PhpDocParser.php

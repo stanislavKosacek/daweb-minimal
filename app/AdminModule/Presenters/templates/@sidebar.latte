@@ -1,0 +1,58 @@
+<ul class="nav metismenu" id="side-menu">
+    <li class="nav-header">
+        <div class="dropdown profile-element">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="text-align: center">
+                <img n:if="$presenter->getUser()->getIdentity()->getImage()" alt="image" class="rounded-circle" src="{img $presenter->getUser()->getIdentity()->getImage(), resize(100,100,exact)}" style="max-width: 48px; display: block; margin: auto">
+                <span class="block m-t-xs font-bold">{$presenter->getUser()->getIdentity()->getName()} {$presenter->getUser()->getIdentity()->getSurname()}</span>
+            </a>
+            <ul class="dropdown-menu m-t-xs">
+                <li><a class="dropdown-item" n:href=":Admin:Sign:Out">Odhlásit se</a></li>
+            </ul>
+        </div>
+        <div class="logo-element">
+            IN+
+        </div>
+    </li>
+    <li n:class="$presenter->isLinkCurrent(':Admin:Homepage:*') ? active">
+        <a n:href=":Admin:Homepage:default">Přehled</a>
+    </li>
+    <li n:class="$presenter->isLinkCurrent(':Admin:Countdown:*') ? active">
+        <a n:href=":Admin:Countdown:default">Přestávky</a>
+    </li>
+    <li n:class="$presenter->isLinkCurrent(':Admin:Exercise:*') ? active">
+        <a n:href=":Admin:Exercise:default">Cvičení</a>
+    </li>
+    <li n:class="$presenter->isLinkCurrent(':Admin:Czechitas:Lesson:*') ? active">
+        <a n:href=":Admin:Czechitas:Lesson:default">Lekce</a>
+    </li>
+    <li n:class="$presenter->isLinkCurrent(':Admin:Czechitas:CodeShare:*') ? active">
+        <a n:href=":Admin:Czechitas:CodeShare:default">CodeShare</a>
+    </li>
+
+{*    <li n:class="$presenter->isModuleCurrent(':Admin:Czechitas') ? active">*}
+{*        <a href="#" aria-expanded="true"><span class="nav-label">Czechitas</span></a>*}
+{*        <ul class="nav nav-second-level collapse in" aria-expanded="true">*}
+{*            <li n:class="$presenter->isLinkCurrent(':Admin:Czechitas:CodeShare:*') ? active">*}
+{*                <a n:href=":Admin:Czechitas:CodeShare:default">CodeShare</a>*}
+{*            </li>*}
+{*            <li n:class="($presenter->isLinkCurrent(':Admin:Czechitas:Lesson:*') or $presenter->isModuleCurrent(':Admin:Czechitas:EditLesson')) ? active">*}
+{*                <a n:href=":Admin:Czechitas:Lesson:default">Lekce</a>*}
+{*            </li>*}
+{*            <li n:class="$presenter->isLinkCurrent(':Admin:Czechitas:HomeworkRepair:*') ? active">*}
+{*                <a n:href=":Admin:Czechitas:HomeworkRepair:default">Oprava úkolů</a>*}
+{*            </li>*}
+{*        </ul>*}
+{*    </li>*}
+
+    <li n:class="$presenter->isLinkCurrent(':Admin:Page:*') ? active">
+        <a n:href=":Admin:Page:default">Stránky</a>
+    </li>
+
+{*    <li n:class="$presenter->isLinkCurrent(':Admin:Email:*') ? active">*}
+{*        <a n:href=":Admin:Email:default">Emaily</a>*}
+{*    </li>*}
+
+    <li n:class="$presenter->isModuleCurrent(':Admin:Settings') ? active">
+        <a n:href=":Admin:Settings:Settings:default">Nastavení</a>
+    </li>
+</ul>

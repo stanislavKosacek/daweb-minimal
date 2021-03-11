@@ -1,0 +1,47 @@
+{block heading}
+    <h2 n:define="title">Url</h2>
+    {include title}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a n:href=":Admin:Settings:Settings:default">Nastavení</a>
+        </li>
+        <li class="breadcrumb-item">
+            <strong>Url</strong>
+        </li>
+    </ol>
+{/block}
+
+{block actions}
+    <a n:href="add" class="btn btn-primary ajax"><i class="fa fa-plus-circle"></i> Přidat URL</a>
+{/block}
+
+{block content}
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>Presenter</th>
+                <th>Akce</th>
+                <th>Locale</th>
+                <th>URL</th>
+                <th>Parameter</th>
+                <th>Hodnota paramentru</th>
+                <th>Titulek</th>
+                <th></th>
+            </tr>
+            {foreach $targets as $target}
+                <tr>
+                    <td>{$target->getPresenter()}</td>
+                    <td>{$target->getAction()}</td>
+                    <td>{$target->getLocale()}</td>
+                    <td>{$target->getSlug()}</td>
+                    <td>{$target->getParamName()}</td>
+                    <td>{$target->getParamValue()}</td>
+                    <td>{$target->getTitle()}</td>
+                    <td>
+                        <a n:href="edit $target->getId()" class="btn btn-primary ajax"><i class="fa fa-edit"></i></a>
+                    </td>
+                </tr>
+            {/foreach}
+        </table>
+    </div>
+{/block}
