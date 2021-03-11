@@ -18,7 +18,7 @@
             <div class="about-left">
                 {if !$user->isInRole("admin") and !$exercise->isPublishedSolution()}
                     <div class="px-3 py-3">
-                        Řešení zatím nebylo publikováno. (Pokud jsi kouč nebo lektor, tak se můžeš pro zobrazení řešení <a href="{plink Sign:in $presenter->storeRequest()}">přihlásit</a>).
+                        Řešení zatím nebylo publikováno. (Pokud jsi kouč nebo lektor, tak se můžeš pro zobrazení řešení <a href="{plink Sign:in}">přihlásit</a>).
                     </div>
                 {else}
                     <div class="about-tab px-3 py-3" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
