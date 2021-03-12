@@ -79,6 +79,18 @@ class ExercisePresenter extends SecuredPresenter
 
 
 
+	public function handleRemoveSolutionFile($fileId)
+	{
+		$solution = $this->exerciseSolutionFileRepository->getExerciseSolutionFileById($fileId);
+
+		if ($solution) {
+			$this->orm->removeAndFlush($solution);
+		}
+
+		$this->redirect("this");
+	}
+
+
 	protected function createComponentGrid()
 	{
 		return $this->exerciseGridFactory->create()->getGrid();
