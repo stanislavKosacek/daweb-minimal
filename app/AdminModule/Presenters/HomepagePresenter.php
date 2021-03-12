@@ -16,6 +16,13 @@ class HomepagePresenter extends SecuredPresenter
 
 
 
+	public function actionDefault()
+	{
+		$this->redirect(":Admin:Czechitas:Lesson:default");
+	}
+
+
+
 	public function renderDefault()
 	{
 //		$calendarEvents = [];
