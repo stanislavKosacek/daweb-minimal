@@ -35,7 +35,11 @@ final class HomepagePresenter extends BasePresenter
 	public function renderDefault()
 	{
 		if (!$this->exercises) {
-			$this->exercises = $this->exerciseRepository->findPublished();
+			if ($this->user and $this->user->isInRole("admin")) {
+				$this->exercises = $this->exerciseRepository->findForAdmin();
+			} else {
+				$this->exercises = $this->exerciseRepository->findPublished();
+			}
 		}
 
 		$this->template->exercises = $this->exercises;
@@ -73,7 +77,11 @@ final class HomepagePresenter extends BasePresenter
 
 	public function handleFindExercises($find = "")
 	{
-		$this->exercises = $this->exerciseRepository->findPublished();
+		if ($this->user and $this->user->isInRole("admin")) {
+			$this->exercises = $this->exerciseRepository->findForAdmin();
+		} else {
+			$this->exercises = $this->exerciseRepository->findPublished();
+		}
 		$this->exercises = $this->exercises->findBy(['name~' => LikeExpression::contains($find)]);
 		$this->redrawControl(NULL, FALSE);
 		$this->redrawControl("exercises");

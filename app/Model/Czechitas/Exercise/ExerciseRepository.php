@@ -49,4 +49,11 @@ class ExerciseRepository extends Repository
 		return $this->findBy(["lesson!=" => NULL, "lesson->page->published<" => new DateTimeImmutable(), "published" => TRUE])->orderBy(["lesson->dateStart" => "ASC", "orderInLesson" => "ASC"]);
 	}
 
+
+
+	public function findForAdmin()
+	{
+		return $this->findBy(["lesson!=" => NULL])->orderBy(["lesson->dateStart" => "ASC", "orderInLesson" => "ASC"]);
+	}
+
 }

@@ -11,6 +11,7 @@ use App\Model\Czechitas\Lesson\LessonRepository;
 use App\Model\Grid\BaseGridFactory;
 use App\Model\Orm;
 use Nette\Application\LinkGenerator;
+use Nextras\Dbal\Utils\DateTimeImmutable;
 
 interface ExerciseGridFactory
 {
@@ -68,6 +69,26 @@ class ExerciseGrid
 		$grid->addColumnText('lesson', 'Lekce')->setRenderer(function (Exercise $exercise) {
 			return $exercise->getLesson() ? $exercise->getLesson()->getPage()->getName() : NULL;
 		})->setSortable();
+
+		$grid->addColumnText('lessonPublished', 'Lekce publikována')->setRenderer(function (Exercise $exercise) {
+			if ($lesson = $exercise->getLesson()) {
+				if (!$lesson->getPage()->getPublished()) {
+					return "<span class='label label-danger' data-toggle='tooltip' data-placement='top' title='' data-original-title='Nepublikováno'>
+								<i class='fa fa-times-circle'></i>
+							</span>";
+				} elseif ($lesson->getPage()->getPublished() < new DateTimeImmutable()) {
+					$time = $lesson->getPage()->getPublished()->format('j. n. Y H:i');
+
+					return "<span class='label label-primary' data-toggle='tooltip' data-placement='top' title='' data-original-title='Publikováno $time'><i class='fa fa-check-circle'></i></span>";
+				} elseif ($lesson->getPage()->getPublished() > new DateTimeImmutable()) {
+					$time = $lesson->getPage()->getPublished()->format('j. n. Y H:i');
+
+					return "<span class='label label-info' data-toggle='tooltip' data-placement='top' title='' data-original-title='Naplánováno $time'><i class='fa fa-clock-o'></i></span>";
+				}
+			}
+
+			return NULL;
+		})->setTemplateEscaping(FALSE);
 
 		$grid->addColumnNumber("orderInLesson", "Pořadí v lekci")
 			 ->setSortable()
@@ -136,6 +157,8 @@ class ExerciseGrid
 			}
 		}
 	}
+
+
 
 	public function inlineEditOrderInLesson($id, string $value)
 	{

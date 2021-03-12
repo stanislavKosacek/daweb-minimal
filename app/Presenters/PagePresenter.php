@@ -65,6 +65,9 @@ final class PagePresenter extends BasePresenter
 		if ($this->selectedPage->isPublished() and $this->selectedPage->getLesson()) {
 			$this->template->lesson = $this->selectedPage->getLesson();
 			$this->setView("lesson");
+		} elseif ($this->user and $this->user->isInRole("admin") and $this->selectedPage->getLesson()) {
+			$this->template->lesson = $this->selectedPage->getLesson();
+			$this->setView("lesson");
 		}
 
 		if ($this->selectedPage->isPublished() and $this->selectedPage->getType() == Page::TYPE_HOMEWORK) {
