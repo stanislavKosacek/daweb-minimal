@@ -160,12 +160,36 @@ h2, h3 {
     max-width: 100%;
   }
 
+  .fig {
+    display: block;
+    margin: 2rem auto;
+    height: auto;
+  }
+
+  .fig-70 {
+    max-width: 70%;
+  }
+
+  .fig-50 {
+    max-width: 50%;
+  }
+
+  .fig-25 {
+    max-width: 25%;
+  }
+
   ol {
     list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    padding-inline-start: 40px;
   }
 
   ul {
     list-style-type: initial;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    padding-inline-start: 40px;
   }
 
   ol > li {

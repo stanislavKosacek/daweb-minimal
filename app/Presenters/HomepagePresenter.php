@@ -42,6 +42,13 @@ final class HomepagePresenter extends BasePresenter
 			}
 		}
 
+		if ($this->user and $this->user->isInRole("admin")) {
+			$lessons = $this->lessonRepository->findAllLessonsByDateStart();
+		} else {
+			$lessons = $this->lessonRepository->findPublishedLessonsByDateStart();
+		}
+
+
 		$this->template->exercises = $this->exercises;
 		if ($this->isAjax()) {
 			$this->redrawControl(NULL, FALSE);
@@ -68,7 +75,7 @@ final class HomepagePresenter extends BasePresenter
 //			];
 //		}
 
-		$this->template->lessons = $this->lessonRepository->findPublishedLessonsByDateStart();
+		$this->template->lessons = $lessons;
 //		$this->template->calendarEvents = $calendarEvents;
 
 	}

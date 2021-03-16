@@ -25,7 +25,13 @@ final class LessonPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-		$this->template->lessons = $this->lessonRepository->findPublishedLessonsByDateStart();
+		if ($this->user and $this->user->isInRole("admin")) {
+			$lessons = $this->lessonRepository->findAllLessonsByDateStart();
+		} else {
+			$lessons = $this->lessonRepository->findPublishedLessonsByDateStart();
+		}
+
+		$this->template->lessons = $lessons;
 
 	}
 

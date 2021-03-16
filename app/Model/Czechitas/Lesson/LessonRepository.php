@@ -39,12 +39,23 @@ class LessonRepository extends Repository
 	}
 
 
+
 	/**
 	 * @return Lesson[]|ICollection
 	 */
 	public function findPublishedLessonsByDateStart(): ICollection
 	{
 		return $this->findBy(["page->published<" => new \DateTimeImmutable()])->orderBy("dateStart", "ASC");
+	}
+
+
+
+	/**
+	 * @return Lesson[]|ICollection
+	 */
+	public function findAllLessonsByDateStart(): ICollection
+	{
+		return $this->findBy([])->orderBy("dateStart", "ASC");
 	}
 
 }
